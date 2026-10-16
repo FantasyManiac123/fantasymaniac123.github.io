@@ -106,3 +106,4 @@ npm test
 Kontrola overuje JSON, načítateľnosť Ink príbehov, prvé vetvenia, globálne premenné, deklarované ilustrácie a aktuálnosť offline cache.
 # gamebook-reader-pwa
 # gamebook-reader-pwa
+# gamebook-reader-pwa
