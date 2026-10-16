@@ -1,0 +1,27 @@
+{
+  "preset": "fantasy",
+  "light": {
+    "background": "#e9eee9", "surface": "#fbfcf7", "surfaceStrong": "#ffffff",
+    "text": "#252b27", "secondary": "#667169", "border": "#c8d1c8",
+    "accent": "#2f7655", "accentStrong": "#1f593e", "accentSoft": "#dcebe1",
+    "accentContrast": "#ffffff", "choice": "#f0f5ef", "choiceHover": "#e0ece2"
+  },
+  "dark": {
+    "background": "#101713", "surface": "#19231d", "surfaceStrong": "#202d25",
+    "text": "#edf4ed", "secondary": "#a9b9ad", "border": "#34483a",
+    "accent": "#73c895", "accentStrong": "#9adcb1", "accentSoft": "#203a2a",
+    "accentContrast": "#102017", "choice": "#1d2a22", "choiceHover": "#294032"
+  },
+  "typography": {"storyFont":"serif","uiFont":"sans-serif","storySize":"19px","lineHeight":1.82,"paragraphIndent":"1.6em"},
+  "layout": {"readingWidth":"940px","gameRadius":"18px","gamePadding":"38px 46px 96px"},
+  "background": {"pattern":"geometric","patternSize":"72px 72px","fixed":true,"gameSurfaceOpacity":0.94,"blur":"4px"},
+  "choices": {"radius":"10px","borderWidth":"1px","accentBorderWidth":"4px"},
+  "illustrations": {"radius":"14px","border":true,"shadow":true},
+  "textStyles": {
+    "player":{"accent":true,"italic":false,"weight":500,"borderLeft":true,"surface":"accentSoft"},
+    "character":{"italic":true,"borderLeft":true,"surface":"surface"},
+    "thought":{"italic":true,"align":"center","color":"secondary"},
+    "system":{"font":"monospace","uppercase":true,"color":"accentStrong"},
+    "inscription":{"font":"serif","weight":700,"align":"center","letterSpacing":"0.08em","color":"accentStrong"}
+  }
+}

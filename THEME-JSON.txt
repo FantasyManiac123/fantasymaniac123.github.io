@@ -1,0 +1,45 @@
+THEME.JSON
+==========
+Každý gamebook môže mať v book.json napríklad:
+
+"theme": "theme.json"
+
+Podporované presety:
+- default
+- mystic
+- fantasy
+- cyberpunk
+- horror
+
+Theme JSON môže meniť:
+- light / dark farby
+- typography
+- layout
+- background.pattern
+- choices
+- illustrations
+- textStyles
+
+Príklad minimálnej cyberpunk témy:
+
+{
+  "preset": "cyberpunk",
+  "light": {
+    "accent": "#00c8d7"
+  },
+  "dark": {
+    "background": "#080b10",
+    "surface": "#10151d",
+    "text": "#e7fbff",
+    "accent": "#00f0ff",
+    "accentStrong": "#66f7ff",
+    "accentSoft": "#0b2930",
+    "border": "#1c4148",
+    "choice": "#101820",
+    "choiceHover": "#153039"
+  },
+  "background": {
+    "pattern": "cyber-grid",
+    "fixed": true
+  }
+}

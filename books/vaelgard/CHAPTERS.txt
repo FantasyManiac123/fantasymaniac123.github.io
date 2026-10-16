@@ -1,0 +1,28 @@
+VAELGARD – KAPITOLOVÁ ŠTRUKTÚRA
+
+Každá kapitola je samostatný Ink súbor a samostatný skompilovaný JSON:
+
+chapters/chapter-01.ink  -> chapters/chapter-01.json
+chapters/chapter-02.ink  -> chapters/chapter-02.json
+chapters/chapter-03.ink  -> chapters/chapter-03.json
+chapters/chapter-04.ink  -> chapters/chapter-04.json
+chapters/chapter-05.ink  -> chapters/chapter-05.json
+chapters/chapter-06.ink  -> chapters/chapter-06.json
+chapters/chapter-07.ink  -> chapters/chapter-07.json
+chapters/chapter-08.ink  -> chapters/chapter-08.json
+chapters/chapter-09.ink  -> chapters/chapter-09.json
+chapters/chapter-10.ink  -> chapters/chapter-10.json
+
+Zoznam kapitol a globálnych premenných je v book.json.
+Reader prenáša medzi kapitolami hodnoty uvedené v poli globalVariables.
+
+Kompilácia všetkých používaných príbehov z koreňa projektu:
+
+  npm run compile:ink
+
+Skript používa kompilátor Inklecate, ktorý musí byť dostupný v PATH. Ak je na
+inom mieste, nastav INKLECATE_BIN na cestu k jeho spustiteľnému súboru. Po
+úspešnej kompilácii automaticky vytvorí novú verziu offline cache podľa obsahu
+súborov v PRECACHE.
+
+story-full.ink je iba archivovaný pôvodný jednodielny príbeh a reader ho nepoužíva.

@@ -1,0 +1,91 @@
+{
+  "preset": "mystic",
+  "light": {
+    "background": "#eeeaf3",
+    "surface": "#fffdfb",
+    "surfaceStrong": "#ffffff",
+    "text": "#292631",
+    "secondary": "#716b7c",
+    "border": "#d4cde0",
+    "accent": "#7564b5",
+    "accentStrong": "#584795",
+    "accentSoft": "#ece8f8",
+    "accentContrast": "#ffffff",
+    "choice": "#f4f0f7",
+    "choiceHover": "#e9e2f3"
+  },
+  "dark": {
+    "background": "#14121a",
+    "surface": "#201c28",
+    "surfaceStrong": "#26212f",
+    "text": "#efebf6",
+    "secondary": "#b0a8bb",
+    "border": "#40384d",
+    "accent": "#b1a3ea",
+    "accentStrong": "#c8bcf4",
+    "accentSoft": "#302945",
+    "accentContrast": "#17131f",
+    "choice": "#292332",
+    "choiceHover": "#352d42"
+  },
+  "typography": {
+    "storyFont": "serif",
+    "uiFont": "sans-serif",
+    "storySize": "19px",
+    "lineHeight": 1.82,
+    "paragraphIndent": "1.7em"
+  },
+  "layout": {
+    "readingWidth": "920px",
+    "gameRadius": "20px",
+    "gamePadding": "34px 42px 96px"
+  },
+  "background": {
+    "pattern": "geometric",
+    "patternSize": "84px 144px",
+    "fixed": true,
+    "gameSurfaceOpacity": 0.92,
+    "blur": "5px"
+  },
+  "choices": {
+    "radius": "12px",
+    "borderWidth": "1px",
+    "accentBorderWidth": "4px"
+  },
+  "illustrations": {
+    "radius": "14px",
+    "border": true,
+    "shadow": true
+  },
+  "textStyles": {
+    "player": {
+      "accent": true,
+      "italic": false,
+      "weight": 500,
+      "borderLeft": true,
+      "surface": "accentSoft"
+    },
+    "character": {
+      "italic": true,
+      "borderLeft": true,
+      "surface": "surface"
+    },
+    "thought": {
+      "italic": true,
+      "align": "center",
+      "color": "secondary"
+    },
+    "system": {
+      "font": "monospace",
+      "uppercase": true,
+      "color": "accentStrong"
+    },
+    "inscription": {
+      "font": "serif",
+      "weight": 700,
+      "align": "center",
+      "letterSpacing": "0.08em",
+      "color": "accentStrong"
+    }
+  }
+}

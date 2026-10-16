@@ -1,0 +1,18 @@
+{
+  "name": "gamebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "scripts": {
+    "compile:ink": "./scripts/compile-ink.sh && node ./scripts/update-precache-version.js",
+    "update:precache": "node ./scripts/update-precache-version.js",
+    "verify": "node ./scripts/verify.js",
+    "test": "npm run verify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inkjs": "^2.4.0"
+  }
+}

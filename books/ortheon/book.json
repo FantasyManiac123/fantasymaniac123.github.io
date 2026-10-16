@@ -1,0 +1,12 @@
+{
+  "id": "ortheon",
+  "title": "Mesto, ktoré si pamätá zajtrajšok",
+  "author": "Autor",
+  "version": "1.0",
+  "language": "sk",
+  "description": "Filozofický fantasy gamebook o meste, ktoré zápasí s vlastnou pamäťou.",
+  "cover": "cover.webp",
+  "story": "story.json",
+  "theme": "theme.json",
+  "illustrations": ["zaciatok"]
+}

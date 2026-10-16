@@ -1,0 +1,32 @@
+INK TEXT STYLES — podporované tagy readera
+
+Bežný opis / rozprávač:
+# narrator
+Ulica bola prázdna a zvony nad ňou sa nehýbali.
+
+Hráčova replika:
+# player
+„Nemám z toho dobrý pocit,“ povedal si.
+
+Hráčova replika s vlastným označením:
+# player: Cudzinec
+„Nemám z toho dobrý pocit,“ povedal si.
+
+Iná postava:
+# character: Elara
+„To hovoríš trochu neskoro,“ odpovedala Elara.
+
+Vnútorná myšlienka:
+# thought
+Niečo na tom mieste bolo zásadne nesprávne.
+
+Systémová / technologická správa:
+# system: ÉTEROMETER
+ANOMÁLIA: 87 %
+
+Nápis, citát, tabuľa, runy:
+# inscription: Nápis na soche
+BOL SOM SPRAVODLIVÝ, PRETOŽE SOM NIKDY NEROZHODOVAL.
+
+Tag platí pre textový výstup, pri ktorom ho Ink vráti v currentTags.
+Každý typ môže konkrétny gamebook ďalej preštýlovať vo svojom theme.json.

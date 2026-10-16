@@ -1,0 +1,46 @@
+name: Verify gamebook
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Inklecate
+        env:
+          INKLECATE_VERSION: v1.2.1
+        run: |
+          tool_dir="$RUNNER_TEMP/inklecate"
+          mkdir -p "$tool_dir"
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/inklecate_linux.zip" \
+            "https://github.com/inkle/ink/releases/download/${INKLECATE_VERSION}/inklecate_linux.zip"
+          unzip -q "$RUNNER_TEMP/inklecate_linux.zip" -d "$tool_dir"
+          chmod +x "$tool_dir/inklecate"
+          echo "INKLECATE_BIN=$tool_dir/inklecate" >> "$GITHUB_ENV"
+
+      - name: Compile Ink sources and update offline cache
+        run: npm run compile:ink
+
+      - name: Verify published gamebook assets
+        run: npm test
+
+      - name: Check generated files are committed
+        run: git diff --exit-code -- books service-worker.js

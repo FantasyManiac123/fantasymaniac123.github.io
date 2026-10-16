@@ -1,0 +1,38 @@
+ILUSTRÁCIE SCÉN
+================
+
+Reader už nepoužíva Ink tagy # image:.
+
+Pravidlo je jednoduché, ale ilustráciu treba aj výslovne uviesť v book.json:
+
+  "illustrations": ["zaciatok", "archiv"]
+
+Každý názov znamená:
+
+  názov knotu -> books/<book-id>/images/<názov-knotu>.webp
+
+Ak sa rovnaký knot používa vo viacerých kapitolách alebo má obrázok iný názov,
+použi presné mapovanie:
+
+  "illustrations": [
+    { "chapter": "chapter-01", "knot": "zaciatok", "file": "prichod" }
+  ]
+
+Príklad:
+
+  === zaciatok ===
+
+Reader automaticky skúsi:
+
+  books/ortheon/images/zaciatok.webp
+
+Ďalšie príklady:
+
+  === archiv ===       -> images/archiv.webp
+  === kralovna ===     -> images/kralovna.webp
+  === cesta_kralovna === -> images/cesta_kralovna.webp
+
+Ak knot nie je v zozname illustrations, reader sa ani nepokúsi obrázok načítať.
+Tým nevznikajú zbytočné 404 požiadavky. Skript npm run update:precache
+zaradí existujúce obrázky do offline cache.
+Do story.ink netreba pridávať žiadne image tagy.

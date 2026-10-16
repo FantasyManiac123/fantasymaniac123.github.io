@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#675d9b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="icon" href="./icons/icon-192.png" type="image/png">
+    <title>Gamebook</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="reader-page">
+    <header class="reader-header">
+        <a class="back-link" href="./index.html" aria-label="Späť do knižnice">← Knižnica</a>
+
+        <div class="reader-heading">
+            <p class="eyebrow">Gamebook</p>
+            <h1 id="bookTitle">Gamebook</h1>
+            <span id="bookSubtitle" class="subtitle">Interaktívny príbeh</span>
+            <span id="chapterTitle" class="chapter-title" hidden></span>
+        </div>
+
+        <button id="themeButton" class="icon-button" type="button" aria-label="Prepnúť svetlú a tmavú tému" title="Prepnúť tému"></button>
+    </header>
+
+    <main id="game">
+        <section id="story" aria-live="polite"></section>
+        <section id="choices" aria-label="Možnosti"></section>
+    </main>
+
+    <footer class="reader-toolbar">
+        <button id="saveButton" type="button">Uložiť</button>
+        <button id="loadButton" type="button">Načítať</button>
+        <button id="restartButton" type="button" class="secondary-action">Nová hra</button>
+    </footer>
+
+    <div id="message" role="status" aria-live="polite"></div>
+
+    <script src="./vendor/ink.js"></script>
+    <script src="./game.js"></script>
+    <script src="./pwa.js"></script>
+</body>
+</html>

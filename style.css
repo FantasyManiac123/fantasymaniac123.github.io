@@ -1,0 +1,1183 @@
+:root {
+    --background: #f5f1e8;
+    --surface: #fffdf8;
+    --surface-strong: #ffffff;
+    --text: #242722;
+    --secondary: #6f746c;
+    --border: #d8d8ce;
+    --accent: #39745a;
+    --accent-strong: #285b45;
+    --accent-soft: #e5f0e9;
+    --accent-contrast: #ffffff;
+    --choice: #f0eee7;
+    --choice-hover: #e4ede6;
+    --danger-soft: #f1e5e2;
+    --shadow: 0 12px 34px rgba(34, 45, 38, 0.08);
+    --reading-width: 920px;
+    --library-width: 1240px;
+}
+
+body.dark {
+    --background: #151a17;
+    --surface: #1d2420;
+    --surface-strong: #222a25;
+    --text: #edf1ed;
+    --secondary: #aab2ac;
+    --border: #364139;
+    --accent: #7fbd96;
+    --accent-strong: #9bd0aa;
+    --accent-soft: #26382e;
+    --accent-contrast: #102018;
+    --choice: #222b26;
+    --choice-hover: #2a3a31;
+    --danger-soft: #3a2927;
+    --shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 9%, transparent), transparent 32rem),
+        var(--background);
+    color: var(--text);
+    font-family: sans-serif;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    outline-offset: 3px;
+}
+
+.site-header,
+.reader-header {
+    width: min(var(--library-width), 100%);
+    margin: 0 auto;
+    padding: 30px 28px 22px;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.reader-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.reader-heading {
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0 0 6px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-family: serif;
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.15;
+    color: var(--text);
+}
+
+.subtitle {
+    display: block;
+    margin-top: 7px;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.back-link {
+    justify-self: start;
+    color: var(--accent-strong);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.icon-button {
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--accent-strong);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.icon-button svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.icon-button:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+}
+
+.icon-button:active {
+    transform: scale(0.95);
+}
+
+.library-main {
+    width: min(var(--library-width), 100%);
+    margin: 0 auto;
+}
+
+#library {
+    padding: 14px 28px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 26px;
+}
+
+.book-card {
+    --book-accent: var(--accent);
+    overflow: hidden;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--book-accent);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, border-color 0.2s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--book-accent) 65%, var(--border));
+}
+
+.book-cover-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1.05;
+    overflow: hidden;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--book-accent) 88%, #000 5%), color-mix(in srgb, var(--book-accent) 45%, #1b211d));
+}
+
+.book-cover {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--book-accent) 88%, #000 5%), color-mix(in srgb, var(--book-accent) 42%, #1b211d));
+}
+
+.cover-mark {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    font-family: serif;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.cover-label {
+    max-width: 90%;
+    font-family: serif;
+    font-size: 25px;
+    line-height: 1.12;
+    font-weight: 700;
+}
+
+.book-content {
+    flex: 1;
+    min-width: 0;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-content h2 {
+    margin: 0 0 8px;
+    font-family: serif;
+    font-size: 23px;
+    line-height: 1.28;
+    overflow-wrap: break-word;
+}
+
+.book-author {
+    margin: 0 0 14px;
+    color: var(--accent-strong);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.book-description {
+    flex: 1;
+    margin: 0 0 22px;
+    color: var(--secondary);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.book-actions {
+    display: grid;
+    gap: 9px;
+}
+
+.read-button,
+.new-game-button,
+.reader-toolbar button {
+    min-height: 44px;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.read-button {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--book-accent);
+    background: var(--book-accent);
+    color: #fff;
+    font-weight: 800;
+}
+
+.read-button:hover {
+    filter: brightness(0.95);
+}
+
+.new-game-button {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.new-game-button:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+}
+
+#game {
+    width: min(var(--reading-width), 100%);
+    min-height: 65vh;
+    margin: 0 auto;
+    padding: 24px 30px 88px;
+}
+
+#story {
+    width: 100%;
+    font-family: serif;
+    font-size: 19px;
+    line-height: 1.82;
+    text-align: left;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+.story-paragraph {
+    margin: 0 0 0.14em;
+    text-indent: 1.7em;
+    animation: appear 0.25s ease;
+}
+
+.story-paragraph:first-child {
+    text-indent: 0;
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#choices {
+    width: 100%;
+    margin-top: 46px;
+    padding-top: 26px;
+    border-top: 2px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.choice {
+    width: 100%;
+    min-height: 56px;
+    padding: 16px 19px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    background: var(--choice);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.45;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.choice:hover {
+    background: var(--choice-hover);
+    border-color: var(--accent);
+}
+
+.choice:active,
+.read-button:active,
+.new-game-button:active,
+.reader-toolbar button:active {
+    transform: scale(0.99);
+}
+
+.story-end {
+    padding: 18px 0 8px;
+    color: var(--accent-strong);
+    font-family: serif;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.reader-toolbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 20px max(13px, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(12px);
+}
+
+.reader-toolbar button {
+    padding: 10px 18px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-weight: 800;
+}
+
+.reader-toolbar button:hover {
+    background: var(--accent-strong);
+}
+
+.reader-toolbar .secondary-action {
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+
+.reader-toolbar .secondary-action:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+#message {
+    position: fixed;
+    z-index: 30;
+    left: 50%;
+    bottom: 82px;
+    transform: translateX(-50%);
+    max-width: calc(100% - 36px);
+    padding: 10px 17px;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--background);
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+#message.visible {
+    opacity: 1;
+}
+
+.loading-message,
+.empty-message,
+.error-message {
+    grid-column: 1 / -1;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+.error-message {
+    color: var(--text);
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        padding: 22px 18px 16px;
+    }
+
+    .reader-header {
+        padding: 18px 18px 12px;
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .reader-heading {
+        min-width: 0;
+    }
+
+    .reader-heading .eyebrow {
+        display: none;
+    }
+
+    .reader-heading h1 {
+        font-size: 21px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .reader-heading .subtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .back-link {
+        width: 42px;
+        overflow: hidden;
+        white-space: nowrap;
+        color: transparent;
+        position: relative;
+    }
+
+    .back-link::before {
+        content: "←";
+        position: absolute;
+        left: 0;
+        color: var(--accent-strong);
+        font-size: 24px;
+    }
+
+    #library {
+        padding: 10px 18px 72px;
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .book-card {
+        display: grid;
+        grid-template-columns: 128px 1fr;
+    }
+
+    .book-cover-wrap {
+        height: 100%;
+        aspect-ratio: auto;
+    }
+
+    .book-cover-placeholder {
+        padding: 14px;
+    }
+
+    .cover-mark {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .cover-label {
+        font-size: 17px;
+    }
+
+    .book-content {
+        padding: 16px;
+    }
+
+    .book-content h2 {
+        font-size: 19px;
+    }
+
+    .book-description {
+        font-size: 14px;
+    }
+
+    #game {
+        padding: 14px 20px 112px;
+    }
+
+    #story {
+        font-size: 18px;
+        line-height: 1.76;
+    }
+
+    .story-paragraph {
+        text-indent: 1.35em;
+    }
+
+    #choices {
+        margin-top: 34px;
+        padding-top: 22px;
+    }
+
+    .choice {
+        min-height: 54px;
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+
+    .reader-toolbar button {
+        flex: 1;
+        padding: 11px 8px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 440px) {
+    .book-card {
+        grid-template-columns: 1fr;
+    }
+
+    .book-cover-wrap {
+        aspect-ratio: 2 / 1;
+    }
+
+    #game {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    #story {
+        font-size: 17px;
+    }
+
+    .reader-toolbar {
+        gap: 6px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+@media (min-width: 1400px) {
+    :root {
+        --reading-width: 980px;
+        --library-width: 1400px;
+    }
+
+    #story {
+        font-size: 20px;
+        line-height: 1.85;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================================
+   ILUSTRÁCIE A POZADIE SCÉNY
+   ========================================================= */
+
+.scene-media:empty {
+    display: none;
+}
+
+.scene-media {
+    width: 100%;
+    margin: 0 0 30px;
+}
+
+.story-illustration {
+    margin: 0 0 28px;
+}
+
+.story-image {
+    display: block;
+    width: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+}
+
+.story-image-caption {
+    margin-top: 9px;
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+}
+
+.story-illustration-wide .story-image {
+    max-height: 620px;
+}
+
+.story-illustration-portrait {
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.story-illustration-portrait .story-image {
+    aspect-ratio: 3 / 4;
+}
+
+.story-illustration-left,
+.story-illustration-right {
+    max-width: 46%;
+}
+
+.story-illustration-left {
+    float: left;
+    margin-right: 24px;
+}
+
+.story-illustration-right {
+    float: right;
+    margin-left: 24px;
+}
+
+body.has-scene-background::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--scene-background);
+    background-size: cover;
+    background-position: center;
+    filter: saturate(0.8);
+}
+
+body.has-scene-background::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: color-mix(in srgb, var(--background) 88%, transparent);
+}
+
+body.has-scene-background #game {
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--surface) 94%, transparent);
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 650px) {
+    .story-illustration-left,
+    .story-illustration-right {
+        float: none;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .story-image {
+        max-height: 420px;
+        border-radius: 10px;
+    }
+}
+
+/* =========================================================
+   TYPOLOGIA TEXTU PRIBEHU
+   Ink tagy:
+   # narrator
+   # player
+   # character: Elara
+   # thought
+   # system
+   # inscription
+   ========================================================= */
+
+.story-paragraph {
+    position: relative;
+}
+
+.story-narrator {
+    color: var(--text);
+}
+
+.story-player,
+.story-character,
+.story-thought,
+.story-system,
+.story-inscription {
+    margin: 1.05em 0;
+    text-indent: 0;
+}
+
+.story-player {
+    padding: 0.72em 1em 0.72em 1.05em;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    background: color-mix(in srgb, var(--accent-soft) 68%, transparent);
+    color: color-mix(in srgb, var(--text) 76%, var(--accent));
+    font-weight: 600;
+}
+
+.story-character {
+    padding: 0.72em 1em 0.72em 1.05em;
+    border-left: 3px solid color-mix(in srgb, var(--accent) 50%, var(--border));
+    border-radius: 0 10px 10px 0;
+    background: color-mix(in srgb, var(--surface-strong) 55%, transparent);
+    font-style: italic;
+}
+
+.story-thought {
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--secondary);
+    font-style: italic;
+    text-align: center;
+}
+
+.story-thought::before,
+.story-thought::after {
+    color: var(--accent);
+    opacity: 0.7;
+}
+
+.story-thought::before { content: "— "; }
+.story-thought::after { content: " —"; }
+
+.story-system {
+    padding: 0.8em 1em;
+    border: 1px solid color-mix(in srgb, var(--accent) 52%, var(--border));
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--accent-soft) 46%, var(--surface));
+    font-family: monospace;
+    font-size: 0.92em;
+    letter-spacing: 0.015em;
+}
+
+.story-inscription {
+    padding: 1em 1.15em;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    color: color-mix(in srgb, var(--text) 82%, var(--accent));
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    text-align: center;
+}
+
+.story-speaker {
+    display: block;
+    margin-bottom: 0.28em;
+    color: var(--accent-strong);
+    font-family: sans-serif;
+    font-size: 0.72em;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.story-player .story-speaker::before {
+    content: "TY · ";
+}
+
+.story-text {
+    white-space: normal;
+}
+
+@media (max-width: 650px) {
+    .story-player,
+    .story-character,
+    .story-system,
+    .story-inscription {
+        padding-left: 0.85em;
+        padding-right: 0.85em;
+    }
+}
+
+/* =========================================================
+   JSON THEME ENGINE
+   Hodnoty nižšie nastavuje game.js z books/<id>/theme.json.
+   ========================================================= */
+:root {
+    --story-font: serif;
+    --ui-font: sans-serif;
+    --story-size: 19px;
+    --story-line-height: 1.82;
+    --paragraph-indent: 1.7em;
+    --game-radius: 0px;
+    --game-padding: 24px 30px 88px;
+    --game-surface-opacity: 0.96;
+    --game-backdrop-blur: 0px;
+    --theme-pattern-size: 84px 144px;
+    --choice-radius: 12px;
+    --choice-border-width: 1px;
+    --choice-accent-border-width: 4px;
+    --image-radius: 14px;
+
+    --text-player-font-style: normal;
+    --text-player-weight: 500;
+    --text-player-align: left;
+    --text-player-letter-spacing: 0em;
+    --text-player-font: inherit;
+    --text-player-color: var(--accent);
+    --text-player-surface: var(--accent-soft);
+    --text-player-border: var(--accent);
+
+    --text-character-font-style: italic;
+    --text-character-weight: 400;
+    --text-character-align: left;
+    --text-character-letter-spacing: 0em;
+    --text-character-font: inherit;
+    --text-character-color: var(--text);
+    --text-character-surface: var(--surface);
+    --text-character-border: var(--border);
+
+    --text-thought-font-style: italic;
+    --text-thought-weight: 400;
+    --text-thought-align: center;
+    --text-thought-letter-spacing: 0em;
+    --text-thought-font: inherit;
+    --text-thought-color: var(--secondary);
+    --text-thought-surface: transparent;
+    --text-thought-border: transparent;
+
+    --text-system-font-style: normal;
+    --text-system-weight: 400;
+    --text-system-align: left;
+    --text-system-letter-spacing: 0em;
+    --text-system-font: monospace;
+    --text-system-color: var(--accent-strong);
+    --text-system-surface: var(--accent-soft);
+    --text-system-border: var(--accent);
+
+    --text-inscription-font-style: normal;
+    --text-inscription-weight: 700;
+    --text-inscription-align: center;
+    --text-inscription-letter-spacing: 0.08em;
+    --text-inscription-font: serif;
+    --text-inscription-color: var(--accent-strong);
+    --text-inscription-surface: transparent;
+    --text-inscription-border: transparent;
+}
+
+body { font-family: var(--ui-font); }
+#story {
+    font-family: var(--story-font);
+    font-size: var(--story-size);
+    line-height: var(--story-line-height);
+}
+.story-paragraph { text-indent: var(--paragraph-indent); }
+
+#game {
+    padding: var(--game-padding);
+    border-radius: var(--game-radius);
+    background: color-mix(in srgb, var(--surface) calc(var(--game-surface-opacity) * 100%), transparent);
+    backdrop-filter: blur(var(--game-backdrop-blur));
+}
+
+.choice {
+    border-radius: var(--choice-radius);
+    border-width: var(--choice-border-width);
+    border-left-width: var(--choice-accent-border-width);
+}
+
+.story-image { border-radius: var(--image-radius); }
+body:not(.theme-image-border) .story-image { border-color: transparent; }
+body:not(.theme-image-shadow) .story-image { box-shadow: none; }
+
+body.theme-background-fixed { background-attachment: fixed; }
+body.theme-pattern-soft-glow {
+    background-color: var(--background);
+    background-image: radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 9%, transparent), transparent 32rem);
+}
+body.theme-pattern-geometric {
+    background-color: var(--background);
+    background-image:
+        radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 25rem),
+        radial-gradient(circle at 82% 76%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem),
+        linear-gradient(30deg, color-mix(in srgb, var(--accent) 5%, transparent) 12%, transparent 12.5%, transparent 87%, color-mix(in srgb, var(--accent) 5%, transparent) 87.5%),
+        linear-gradient(150deg, color-mix(in srgb, var(--accent) 5%, transparent) 12%, transparent 12.5%, transparent 87%, color-mix(in srgb, var(--accent) 5%, transparent) 87.5%);
+    background-size: auto, auto, var(--theme-pattern-size), var(--theme-pattern-size);
+}
+body.theme-pattern-cyber-grid {
+    background-color: var(--background);
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px),
+        radial-gradient(circle at top, color-mix(in srgb, var(--accent) 10%, transparent), transparent 36rem);
+    background-size: 32px 32px, 32px 32px, auto;
+}
+body.theme-pattern-parchment {
+    background-color: var(--background);
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(110,80,40,.06) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 65%, rgba(110,80,40,.05) 0 1px, transparent 1.5px),
+        linear-gradient(135deg, rgba(120,90,50,.025), transparent 35%, rgba(120,90,50,.02));
+    background-size: 19px 19px, 27px 27px, auto;
+}
+body.theme-pattern-noise {
+    background-color: var(--background);
+    background-image:
+        repeating-radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--accent) 3%, transparent) 0 1px, transparent 1px 4px),
+        linear-gradient(135deg, rgba(0,0,0,.03), transparent 45%, rgba(255,255,255,.015));
+}
+body.has-scene-background { background-image: var(--scene-background); background-size: cover; background-position: center; }
+
+.story-player,
+.story-character,
+.story-thought,
+.story-system,
+.story-inscription {
+    text-indent: 0;
+}
+.story-player {
+    font-family: var(--text-player-font);
+    font-style: var(--text-player-font-style);
+    font-weight: var(--text-player-weight);
+    text-align: var(--text-player-align);
+    letter-spacing: var(--text-player-letter-spacing);
+    color: var(--text-player-color);
+    background: var(--text-player-surface);
+    border-left-color: var(--text-player-border);
+}
+.story-character {
+    font-family: var(--text-character-font);
+    font-style: var(--text-character-font-style);
+    font-weight: var(--text-character-weight);
+    text-align: var(--text-character-align);
+    letter-spacing: var(--text-character-letter-spacing);
+    color: var(--text-character-color);
+    background: var(--text-character-surface);
+    border-left-color: var(--text-character-border);
+}
+.story-thought {
+    font-family: var(--text-thought-font);
+    font-style: var(--text-thought-font-style);
+    font-weight: var(--text-thought-weight);
+    text-align: var(--text-thought-align);
+    letter-spacing: var(--text-thought-letter-spacing);
+    color: var(--text-thought-color);
+    background: var(--text-thought-surface);
+}
+.story-system {
+    font-family: var(--text-system-font);
+    font-style: var(--text-system-font-style);
+    font-weight: var(--text-system-weight);
+    text-align: var(--text-system-align);
+    letter-spacing: var(--text-system-letter-spacing);
+    color: var(--text-system-color);
+    background: var(--text-system-surface);
+    border-left-color: var(--text-system-border);
+}
+.story-inscription {
+    font-family: var(--text-inscription-font);
+    font-style: var(--text-inscription-font-style);
+    font-weight: var(--text-inscription-weight);
+    text-align: var(--text-inscription-align);
+    letter-spacing: var(--text-inscription-letter-spacing);
+    color: var(--text-inscription-color);
+    background: var(--text-inscription-surface);
+}
+body.text-system-uppercase .story-system,
+body.text-inscription-uppercase .story-inscription,
+body.text-player-uppercase .story-player,
+body.text-character-uppercase .story-character,
+body.text-thought-uppercase .story-thought { text-transform: uppercase; }
+
+/* =========================================================
+   PWA INSTALL
+   ========================================================= */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.install-button {
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-contrast, #fff);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 20%, transparent);
+    transition: transform .15s ease, background .2s ease, opacity .2s ease;
+}
+
+.install-button:hover { background: var(--accent-strong); }
+.install-button:active { transform: translateY(1px) scale(.99); }
+.install-button[hidden] { display: none !important; }
+
+.install-help {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(10, 9, 16, .58);
+    backdrop-filter: blur(8px);
+}
+
+.install-help[hidden] { display: none !important; }
+
+.install-help-card {
+    position: relative;
+    width: min(430px, 100%);
+    padding: 28px 26px 24px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
+}
+
+.install-help-card h2 {
+    margin: 0 40px 10px 0;
+    color: var(--accent);
+    font-family: var(--story-font, serif);
+}
+
+.install-help-card p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.install-help-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--choice);
+    color: var(--text);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media (max-width: 650px) {
+    .site-header {
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        gap: 7px;
+    }
+
+    .install-button {
+        min-height: 42px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 430px) {
+    .site-header {
+        flex-wrap: wrap;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .install-button {
+        flex: 1;
+    }
+}
+
+/* =========================================================
+   KAPITOLY
+   ========================================================= */
+.chapter-title {
+    display: block;
+    margin-top: 7px;
+    color: var(--accent);
+    font-family: var(--story-font);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.chapter-end {
+    width: 100%;
+    padding: 18px 0 4px;
+}
+
+.chapter-end-label {
+    margin: 0 0 12px;
+    color: var(--secondary);
+    font-family: var(--ui-font);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.chapter-next-button {
+    border-color: var(--accent);
+    font-weight: 700;
+}

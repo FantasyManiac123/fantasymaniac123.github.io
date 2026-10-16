@@ -1,0 +1,77 @@
+{
+  "id": "vaelgard",
+  "title": "Vaelgard: Akadémia dračích jazdcov",
+  "author": "OpenAI",
+  "version": "2.3",
+  "language": "sk",
+  "description": "Fantasy gamebook o prvom roku na akadémii, kde si drak vyberá jazdca — a staré puto medzi drakmi a ľuďmi začína praskať.",
+  "cover": "cover.webp",
+  "theme": "theme.json",
+  "illustrations": [
+    { "chapter": "chapter-01", "knot": "zaciatok", "file": "zaciatok" },
+    "vzlet",
+    { "chapter": "chapter-08", "knot": "teleskop", "file": "observatorium" }
+  ],
+  "globalVariables": [
+    "odvaha",
+    "rozum",
+    "sucit",
+    "vzdor",
+    "puto",
+    "tajomstvo",
+    "zranenie",
+    "drak"
+  ],
+  "chapters": [
+    {
+      "id": "chapter-01",
+      "title": "I. Príchod",
+      "story": "chapters/chapter-01.json"
+    },
+    {
+      "id": "chapter-02",
+      "title": "II. Prvé puto",
+      "story": "chapters/chapter-02.json"
+    },
+    {
+      "id": "chapter-03",
+      "title": "III. Zakázaný archív",
+      "story": "chapters/chapter-03.json"
+    },
+    {
+      "id": "chapter-04",
+      "title": "IV. Kotva",
+      "story": "chapters/chapter-04.json"
+    },
+    {
+      "id": "chapter-05",
+      "title": "V. Prvý skutočný let",
+      "story": "chapters/chapter-05.json"
+    },
+    {
+      "id": "chapter-06",
+      "title": "VI. Koruna",
+      "story": "chapters/chapter-06.json"
+    },
+    {
+      "id": "chapter-07",
+      "title": "VII. Tichí",
+      "story": "chapters/chapter-07.json"
+    },
+    {
+      "id": "chapter-08",
+      "title": "VIII. Observatórium Aster",
+      "story": "chapters/chapter-08.json"
+    },
+    {
+      "id": "chapter-09",
+      "title": "IX. Rada popola",
+      "story": "chapters/chapter-09.json"
+    },
+    {
+      "id": "chapter-10",
+      "title": "X. Mesto bez mena",
+      "story": "chapters/chapter-10.json"
+    }
+  ]
+}
