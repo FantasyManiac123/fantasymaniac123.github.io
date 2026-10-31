@@ -16,6 +16,10 @@ Theme JSON môže meniť:
 - typography
 - layout
 - background.pattern
+<<<<<<< HEAD
+=======
+- background.patternImage / background.darkPatternImage
+>>>>>>> f20273d (Initial commit)
 - choices
 - illustrations
 - textStyles
@@ -43,3 +47,20 @@ Príklad minimálnej cyberpunk témy:
     "fixed": true
   }
 }
+<<<<<<< HEAD
+=======
+
+Vlastný obrázkový vzor pozadia
+-------------------------------
+Do priečinka books/<id>/images/ vlož malý bezšvový obrázok (napríklad SVG
+alebo WebP) a uveď iba jeho názov. `patternImage` sa použije vo svetlej téme,
+`darkPatternImage` v tmavej. Obrázok sa opakuje; `patternSize` určuje veľkosť
+jednej dlaždice.
+
+"background": {
+  "patternImage": "pattern-light.svg",
+  "darkPatternImage": "pattern-dark.svg",
+  "patternSize": "256px 256px",
+  "fixed": true
+}
+>>>>>>> f20273d (Initial commit)

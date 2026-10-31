@@ -8,5 +8,25 @@
   "cover": "cover.webp",
   "story": "story.json",
   "theme": "theme.json",
+<<<<<<< HEAD
+=======
+  "hud": {
+    "attributes": [
+      { "variable": "meno", "label": "Meno", "icon": "✦", "emptyValue": "Cudzinec", "wide": true, "identity": true },
+      { "variable": "sucit", "label": "Súcit", "icon": "♡" },
+      { "variable": "vola", "label": "Vôľa", "icon": "◇" },
+      { "variable": "pochybnost", "label": "Pochybnosť", "icon": "◌" },
+      { "variable": "poznanie", "label": "Poznanie", "icon": "◉" }
+    ],
+    "inventory": {
+      "label": "Inventár",
+      "items": [
+        { "variable": "ma_mincu", "label": "Čierna minca" },
+        { "variable": "ma_knihu", "label": "Kniha spomienok" }
+      ],
+      "emptyLabel": "Zatiaľ nenesieš žiadny predmet."
+    }
+  },
+>>>>>>> f20273d (Initial commit)
   "illustrations": ["zaciatok"]
 }

@@ -8,10 +8,38 @@
   "cover": "cover.webp",
   "theme": "theme.json",
   "illustrations": [
+<<<<<<< HEAD
     { "chapter": "chapter-01", "knot": "zaciatok", "file": "zaciatok" },
     "vzlet",
     { "chapter": "chapter-08", "knot": "teleskop", "file": "observatorium" }
   ],
+=======
+    { "chapter": "chapter-01", "knot": "zaciatok", "file": "chapter-01.png" },
+    { "chapter": "chapter-02", "knot": "zaciatok", "file": "chapter-02.png" },
+    { "chapter": "chapter-03", "knot": "zaciatok", "file": "chapter-03.png" },
+    { "chapter": "chapter-04", "knot": "zaciatok", "file": "chapter-04.png" },
+    { "chapter": "chapter-05", "knot": "zaciatok", "file": "chapter-05.png" },
+    { "chapter": "chapter-06", "knot": "zaciatok", "file": "chapter-06.png" },
+    { "chapter": "chapter-07", "knot": "zaciatok", "file": "chapter-07.png" },
+    { "chapter": "chapter-08", "knot": "zaciatok", "file": "chapter-08.png" },
+    { "chapter": "chapter-09", "knot": "zaciatok", "file": "chapter-09.png" },
+    { "chapter": "chapter-10", "knot": "zaciatok", "file": "chapter-10.png" },
+    "vzlet",
+    { "chapter": "chapter-08", "knot": "teleskop", "file": "observatorium" }
+  ],
+  "hud": {
+    "attributes": [
+      { "variable": "odvaha", "label": "Odvaha", "icon": "⚔" },
+      { "variable": "rozum", "label": "Rozum", "icon": "✦" },
+      { "variable": "sucit", "label": "Súcit", "icon": "♡" },
+      { "variable": "vzdor", "label": "Vzdor", "icon": "🛡" },
+      { "variable": "puto", "label": "Puto s drakom", "icon": "⛓" },
+      { "variable": "tajomstvo", "label": "Tajomstvá", "icon": "🗝" },
+      { "variable": "zranenie", "label": "Zranenia", "icon": "✚" },
+      { "variable": "drak", "label": "Drak", "icon": "🐉", "emptyValue": "Ešte nevybraný", "wide": true, "identity": true }
+    ]
+  },
+>>>>>>> f20273d (Initial commit)
   "globalVariables": [
     "odvaha",
     "rozum",

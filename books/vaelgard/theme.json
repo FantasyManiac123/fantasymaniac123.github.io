@@ -2,6 +2,7 @@
   "preset": "fantasy",
   "light": {
     "background": "#e9eee9", "surface": "#fbfcf7", "surfaceStrong": "#ffffff",
+<<<<<<< HEAD
     "text": "#252b27", "secondary": "#667169", "border": "#c8d1c8",
     "accent": "#2f7655", "accentStrong": "#1f593e", "accentSoft": "#dcebe1",
     "accentContrast": "#ffffff", "choice": "#f0f5ef", "choiceHover": "#e0ece2"
@@ -17,11 +18,33 @@
   "background": {"pattern":"geometric","patternSize":"72px 72px","fixed":true,"gameSurfaceOpacity":0.94,"blur":"4px"},
   "choices": {"radius":"10px","borderWidth":"1px","accentBorderWidth":"4px"},
   "illustrations": {"radius":"14px","border":true,"shadow":true},
+=======
+    "text": "#2c302a", "secondary": "#697268", "border": "#c5cec3",
+    "accent": "#6b6140", "accentStrong": "#4d472d", "accentSoft": "#e4eadf",
+    "accentContrast": "#ffffff", "choice": "#f0f4ee", "choiceHover": "#e0e9de"
+  },
+  "dark": {
+    "background": "#121512", "surface": "#23251f", "surfaceStrong": "#2d2f27",
+    "text": "#f4e8cf", "secondary": "#c1af8c", "border": "#625d4a",
+    "accent": "#be9050", "accentStrong": "#e3bd79", "accentSoft": "#3b3425",
+    "accentContrast": "#20170d", "choice": "#2c2c24", "choiceHover": "#393728"
+  },
+  "typography": {"storyFont":"sans-serif","uiFont":"sans-serif","storySize":"19px","lineHeight":1.82,"paragraphIndent":"1.6em"},
+  "layout": {"readingWidth":"940px","gameRadius":"26px","gamePadding":"38px 46px 96px"},
+  "background": {"pattern":"parchment","patternImage":"exec-ccb928c3-0b49-489a-96e9-40a2af8260ac.png","darkPatternImage":"exec-6f387a87-1b88-4a89-9cfb-c834e0e9290f.png","patternSize":"460px 460px","fixed":true,"gameSurfaceOpacity":1,"blur":"0px"},
+  "choices": {"radius":"16px","borderWidth":"1px","accentBorderWidth":"4px"},
+  "illustrations": {"radius":"18px","border":true,"shadow":true},
+>>>>>>> f20273d (Initial commit)
   "textStyles": {
     "player":{"accent":true,"italic":false,"weight":500,"borderLeft":true,"surface":"accentSoft"},
     "character":{"italic":true,"borderLeft":true,"surface":"surface"},
     "thought":{"italic":true,"align":"center","color":"secondary"},
+<<<<<<< HEAD
     "system":{"font":"monospace","uppercase":true,"color":"accentStrong"},
     "inscription":{"font":"serif","weight":700,"align":"center","letterSpacing":"0.08em","color":"accentStrong"}
+=======
+    "system":{"font":"sans-serif","uppercase":true,"color":"accentStrong"},
+    "inscription":{"font":"sans-serif","weight":700,"align":"center","letterSpacing":"0.08em","color":"accentStrong"}
+>>>>>>> f20273d (Initial commit)
   }
 }

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="scale" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#edf3e9"/><stop offset=".52" stop-color="#cadccf"/><stop offset="1" stop-color="#a9c5b0"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#b9994d"/><stop offset=".5" stop-color="#7d9b73"/><stop offset="1" stop-color="#927333"/>
+    </linearGradient>
+    <path id="s" d="M0 0C24 0 42 16 42 39 42 61 22 77 0 89-22 77-42 61-42 39-42 16-24 0 0 0Z"/>
+    <pattern id="scales" width="96" height="112" patternUnits="userSpaceOnUse">
+      <rect width="96" height="112" fill="#e6ede4"/>
+      <g fill="url(#scale)" stroke="url(#edge)" stroke-width="1.4">
+        <use href="#s" x="48" y="-28"/><use href="#s" x="0" y="28"/><use href="#s" x="96" y="28"/><use href="#s" x="48" y="84"/>
+      </g>
+      <g fill="none" stroke="#f8f4db" stroke-width="1" opacity=".6">
+        <path d="M48-18c14 0 26 10 26 25M0 38c14 0 26 10 26 25M96 38c-14 0-26 10-26 25M48 94c14 0 26 10 26 25"/>
+      </g>
+      <g fill="none" stroke="#486c54" stroke-width=".8" opacity=".32">
+        <path d="M48-4v49M0 52v49M96 52V101M48 108v49"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="256" height="256" fill="url(#scales)"/>
+</svg>

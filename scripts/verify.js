@@ -40,6 +40,115 @@ function isSafeRelativePath(value) {
         && !value.startsWith("/");
 }
 
+<<<<<<< HEAD
+=======
+function isValidVariableName(value) {
+    return typeof value === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
+}
+
+function verifyHud(bookPath, book, globalVariables) {
+    if (book.hud === undefined) return;
+    if (!book.hud || typeof book.hud !== "object" || Array.isArray(book.hud)) {
+        fail(`${bookPath} má neplatnú konfiguráciu hud.`);
+    }
+
+    const attributes = book.hud.attributes === undefined ? [] : book.hud.attributes;
+    if (!Array.isArray(attributes)) fail(`${bookPath} má neplatné atribúty hud.`);
+
+    const usedVariables = [];
+    for (const attribute of attributes) {
+        if (!attribute || !isValidVariableName(attribute.variable) || typeof attribute.label !== "string" || !attribute.label.trim()) {
+            fail(`${bookPath} má neplatný atribút hud.`);
+        }
+        if (attribute.emptyValue !== undefined && typeof attribute.emptyValue !== "string") {
+            fail(`${bookPath} má neplatnú prázdnu hodnotu atribútu hud.`);
+        }
+        if (attribute.icon !== undefined && (typeof attribute.icon !== "string" || !attribute.icon.trim() || attribute.icon.trim().length > 12)) {
+            fail(`${bookPath} má neplatnú ikonu atribútu hud.`);
+        }
+        if (attribute.wide !== undefined && typeof attribute.wide !== "boolean") {
+            fail(`${bookPath} má neplatné rozloženie atribútu hud.`);
+        }
+        if (attribute.identity !== undefined && typeof attribute.identity !== "boolean") {
+            fail(`${bookPath} má neplatnú skupinu atribútu hud.`);
+        }
+        usedVariables.push(attribute.variable);
+    }
+
+    const inventory = book.hud.inventory;
+    if (inventory !== undefined) {
+        if (!inventory || typeof inventory !== "object" || Array.isArray(inventory)) {
+            fail(`${bookPath} má neplatný inventár hud.`);
+        }
+        if (inventory.label !== undefined && (typeof inventory.label !== "string" || !inventory.label.trim())) {
+            fail(`${bookPath} má neplatný názov inventára hud.`);
+        }
+        if (inventory.emptyLabel !== undefined && (typeof inventory.emptyLabel !== "string" || !inventory.emptyLabel.trim())) {
+            fail(`${bookPath} má neplatný text prázdneho inventára hud.`);
+        }
+        if (inventory.variable !== undefined) {
+            if (!isValidVariableName(inventory.variable)) fail(`${bookPath} má neplatnú premennú inventára hud.`);
+            usedVariables.push(inventory.variable);
+        }
+
+        const items = inventory.items === undefined ? [] : inventory.items;
+        if (!Array.isArray(items)) fail(`${bookPath} má neplatné položky inventára hud.`);
+        for (const item of items) {
+            if (!item || !isValidVariableName(item.variable) || typeof item.label !== "string" || !item.label.trim()) {
+                fail(`${bookPath} má neplatnú položku inventára hud.`);
+            }
+            usedVariables.push(item.variable);
+        }
+
+        if (inventory.variable === undefined && items.length === 0) {
+            fail(`${bookPath} má inventár hud bez premennej alebo položiek.`);
+        }
+    }
+
+    if (attributes.length === 0 && inventory === undefined) fail(`${bookPath} má prázdnu konfiguráciu hud.`);
+
+    if (Array.isArray(book.chapters) && book.chapters.length > 0) {
+        for (const name of usedVariables) {
+            if (!globalVariables.includes(name)) {
+                fail(`${bookPath} používa v hud premennú ${name}, ktorá nie je v globalVariables.`);
+            }
+        }
+    }
+
+    checks += 1;
+}
+
+function verifyTheme(bookPath, bookId, book) {
+    if (book.theme === undefined) return;
+    if (typeof book.theme !== "string" || !/^[a-zA-Z0-9_.-]+$/.test(book.theme)) {
+        fail(`${bookPath} má neplatný názov témy.`);
+    }
+
+    const themePath = `books/${bookId}/${book.theme}`;
+    const theme = readJson(themePath);
+    const background = theme.background;
+    if (background === undefined) return;
+    if (!background || typeof background !== "object" || Array.isArray(background)) {
+        fail(`${themePath} má neplatnú konfiguráciu pozadia.`);
+    }
+
+    for (const key of ["patternImage", "darkPatternImage"]) {
+        const filename = background[key];
+        if (filename === undefined) continue;
+        if (!isSafeRelativePath(filename)) {
+            fail(`${themePath} má neplatný obrázok pozadia ${key}.`);
+        }
+
+        const imagePath = path.join(projectRoot, "books", bookId, "images", filename);
+        const relativeImagePath = path.relative(path.join(projectRoot, "books", bookId, "images"), imagePath);
+        if (relativeImagePath.startsWith("..") || path.isAbsolute(relativeImagePath) || !fs.existsSync(imagePath)) {
+            fail(`${themePath} odkazuje na chýbajúci obrázok pozadia: ${filename}.`);
+        }
+        checks += 1;
+    }
+}
+
+>>>>>>> f20273d (Initial commit)
 function continueUntilChoiceOrEnd(story, relativePath) {
     let linesRead = 0;
     while (story.canContinue) {
@@ -94,20 +203,37 @@ function verifyBooks() {
         if (typeof book.version !== "string" || book.version.length === 0) fail(`${bookPath} nemá verziu pre kompatibilitu saveov.`);
 
         const globalVariables = Array.isArray(book.globalVariables) ? book.globalVariables : [];
+<<<<<<< HEAD
         if (!globalVariables.every(name => typeof name === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(name))) {
             fail(`${bookPath} obsahuje neplatnú globálnu premennú.`);
         }
+=======
+        if (!globalVariables.every(isValidVariableName)) {
+            fail(`${bookPath} obsahuje neplatnú globálnu premennú.`);
+        }
+        verifyHud(bookPath, book, globalVariables);
+        verifyTheme(bookPath, entry.id, book);
+>>>>>>> f20273d (Initial commit)
 
         const illustrations = Array.isArray(book.illustrations) ? book.illustrations : [];
         for (const illustration of illustrations) {
             const imageName = typeof illustration === "string" ? illustration : illustration?.file;
             const knotName = typeof illustration === "string" ? illustration : illustration?.knot;
             const chapterId = typeof illustration === "object" ? illustration?.chapter : null;
+<<<<<<< HEAD
             if (!/^[a-zA-Z0-9_-]+$/.test(imageName) || !/^[a-zA-Z0-9_-]+$/.test(knotName)
                 || (chapterId !== null && !/^[a-zA-Z0-9_-]+$/.test(chapterId))) {
                 fail(`${bookPath} obsahuje neplatný názov ilustrácie.`);
             }
             const imagePath = `books/${entry.id}/images/${imageName}.webp`;
+=======
+            if (!/^[a-zA-Z0-9_-]+(?:\.(?:webp|png|jpe?g))?$/.test(imageName) || !/^[a-zA-Z0-9_-]+$/.test(knotName)
+                || (chapterId !== null && !/^[a-zA-Z0-9_-]+$/.test(chapterId))) {
+                fail(`${bookPath} obsahuje neplatný názov ilustrácie.`);
+            }
+            const imageFilename = /\.(?:webp|png|jpe?g)$/i.test(imageName) ? imageName : `${imageName}.webp`;
+            const imagePath = `books/${entry.id}/images/${imageFilename}`;
+>>>>>>> f20273d (Initial commit)
             if (!fs.existsSync(path.join(projectRoot, imagePath))) fail(`${bookPath} odkazuje na chýbajúcu ilustráciu ${imagePath}.`);
             checks += 1;
         }

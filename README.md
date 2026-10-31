@@ -75,8 +75,62 @@ Namiesto `story` môže `book.json` obsahovať pole `chapters`. Premenné, ktor�
 }
 ```
 
+<<<<<<< HEAD
 ## Ilustrácie
 
+=======
+## Atribúty a inventár
+
+Čítačka vie nad príbehom zobraziť panel postavy. V `book.json` pridaj konfiguráciu `hud`; hodnoty sa čítajú priamo z globálnych Ink premenných a obnovia sa po každej voľbe aj po načítaní saveu.
+
+```json
+{
+  "hud": {
+    "attributes": [
+      { "variable": "zdravie", "label": "Zdravie", "icon": "♥" },
+      { "variable": "meno", "label": "Meno", "emptyValue": "Cudzinec", "wide": true, "identity": true }
+    ],
+    "inventory": {
+      "variable": "inventar",
+      "label": "Inventár",
+      "emptyLabel": "Inventár je prázdny."
+    }
+  }
+}
+```
+
+Voliteľná vlastnosť `icon` zobrazí pri názve atribútu krátky symbol alebo emoji.
+
+Inventár v podobe Ink `LIST` sa zobrazí ako zoznam predmetov:
+
+```ink
+LIST inventar = kluc, mec, elixir
+~ inventar += kluc
+```
+
+Pre existujúci príbeh s booleovskými premennými použi namiesto `variable` pole `items`:
+
+```json
+"inventory": {
+  "items": [
+    { "variable": "ma_kluc", "label": "Starý kľúč" }
+  ]
+}
+```
+
+## Ilustrácie
+
+Pre aktuálnu sériu desiatich vygenerovaných ilustrácií Vaelgardu použi:
+
+```bash
+npm run import:vaelgard-art
+```
+
+Skript vytvorí bezpečné kópie `chapter-01.png` až `chapter-10.png` v
+`books/vaelgard/images/`. Ak sú zdrojové obrázky inde, odovzdaj cestu ako
+argument: `npm run import:vaelgard-art -- /cesta/k/obrazkom`.
+
+>>>>>>> f20273d (Initial commit)
 Ilustrácia sa viaže na názov Ink knotu. Súbor `images/zaciatok.webp` sa zobrazí pri knote `=== zaciatok ===` iba ak je knot uvedený v `illustrations`:
 
 ```json
@@ -85,6 +139,12 @@ Ilustrácia sa viaže na názov Ink knotu. Súbor `images/zaciatok.webp` sa zobr
 }
 ```
 
+<<<<<<< HEAD
+=======
+V rozšírenom mapovaní môže `file` obsahovať aj príponu `.png`, `.jpg` alebo
+`.webp`; bez prípony čítačka ďalej predvolene používa `.webp`.
+
+>>>>>>> f20273d (Initial commit)
 Ak sa názov knotu opakuje v kapitolách alebo názov súboru má byť odlišný, použi presné mapovanie:
 
 ```json

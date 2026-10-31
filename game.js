@@ -10,14 +10,23 @@ let globalGameState = {};
 
 const storyElement = document.getElementById("story");
 const choicesElement = document.getElementById("choices");
+<<<<<<< HEAD
 const saveButton = document.getElementById("saveButton");
 const loadButton = document.getElementById("loadButton");
 const restartButton = document.getElementById("restartButton");
+=======
+>>>>>>> f20273d (Initial commit)
 const themeButton = document.getElementById("themeButton");
 const messageElement = document.getElementById("message");
 const titleElement = document.getElementById("bookTitle");
 const subtitleElement = document.getElementById("bookSubtitle");
 const chapterTitleElement = document.getElementById("chapterTitle");
+<<<<<<< HEAD
+=======
+const gameHudElement = document.getElementById("gameHud");
+const gameHudButton = document.getElementById("gameHudButton");
+const gameElement = document.getElementById("game");
+>>>>>>> f20273d (Initial commit)
 
 const moonIcon = `
 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -55,6 +64,10 @@ async function init() {
         bookMetadata = await metadataResponse.json();
         setBookMetadata();
         await loadBookTheme();
+<<<<<<< HEAD
+=======
+        setupGameHud();
+>>>>>>> f20273d (Initial commit)
 
         chapterMode = Array.isArray(bookMetadata.chapters) && bookMetadata.chapters.length > 0;
 
@@ -140,6 +153,10 @@ async function loadSingleStory() {
 
     updateChapterTitle();
     render(savedDisplay);
+<<<<<<< HEAD
+=======
+    autosave();
+>>>>>>> f20273d (Initial commit)
 }
 
 async function loadChapter(index, inkState = null, globals = null, display = null) {
@@ -168,6 +185,10 @@ async function loadChapter(index, inkState = null, globals = null, display = nul
     captureGlobalState();
     updateChapterTitle();
     render(display);
+<<<<<<< HEAD
+=======
+    autosave();
+>>>>>>> f20273d (Initial commit)
 }
 
 function updateChapterTitle() {
@@ -275,12 +296,245 @@ function buildChapterSave() {
 
 function setBookMetadata() {
     if (!bookMetadata) return;
+<<<<<<< HEAD
+=======
+    document.body.dataset.bookId = bookId;
+    document.body.classList.add(`book-${bookId}`);
+>>>>>>> f20273d (Initial commit)
     document.title = bookMetadata.title || "Gamebook";
     document.documentElement.lang = bookMetadata.language || "sk";
     if (titleElement) titleElement.textContent = bookMetadata.title || "Gamebook";
     if (subtitleElement) subtitleElement.textContent = bookMetadata.author || "Interaktívny príbeh";
 }
 
+<<<<<<< HEAD
+=======
+function isValidVariableName(value) {
+    return typeof value === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
+}
+
+function getHudConfig() {
+    const hud = bookMetadata?.hud;
+    if (!hud || typeof hud !== "object" || Array.isArray(hud)) return null;
+
+    const attributes = Array.isArray(hud.attributes)
+        ? hud.attributes
+            .filter(item => item && isValidVariableName(item.variable) && typeof item.label === "string" && item.label.trim())
+            .map(item => ({
+                variable: item.variable,
+                label: item.label.trim(),
+                icon: typeof item.icon === "string" && item.icon.trim() && item.icon.trim().length <= 12
+                    ? item.icon.trim()
+                    : "",
+                emptyValue: typeof item.emptyValue === "string" ? item.emptyValue : "—",
+                wide: item.wide === true,
+                identity: item.identity === true
+            }))
+        : [];
+
+    const inventory = hud.inventory && typeof hud.inventory === "object" && !Array.isArray(hud.inventory)
+        ? {
+            label: typeof hud.inventory.label === "string" && hud.inventory.label.trim()
+                ? hud.inventory.label.trim()
+                : "Inventár",
+            variable: isValidVariableName(hud.inventory.variable) ? hud.inventory.variable : null,
+            items: Array.isArray(hud.inventory.items)
+                ? hud.inventory.items
+                    .filter(item => item && isValidVariableName(item.variable) && typeof item.label === "string" && item.label.trim())
+                    .map(item => ({ variable: item.variable, label: item.label.trim() }))
+                : [],
+            emptyLabel: typeof hud.inventory.emptyLabel === "string" && hud.inventory.emptyLabel.trim()
+                ? hud.inventory.emptyLabel.trim()
+                : "Inventár je prázdny."
+        }
+        : null;
+
+    if (!attributes.length && !inventory) return null;
+    if (inventory && !inventory.variable && !inventory.items.length) return attributes.length ? { attributes, inventory: null } : null;
+
+    return { attributes, inventory };
+}
+
+function createHudHeading(text) {
+    const heading = document.createElement("h2");
+    heading.className = "game-hud-heading";
+    heading.textContent = text;
+    return heading;
+}
+
+function createHudAttributesSection(attributes, headingText, className) {
+    const section = document.createElement("section");
+    section.className = `game-hud-section ${className}`;
+    section.appendChild(createHudHeading(headingText));
+
+    const list = document.createElement("dl");
+    list.className = "game-hud-attributes";
+    for (const attribute of attributes) {
+        const row = document.createElement("div");
+        row.className = "game-hud-attribute";
+        row.classList.toggle("game-hud-attribute-wide", attribute.wide);
+
+        const label = document.createElement("dt");
+        if (attribute.icon) {
+            const icon = document.createElement("span");
+            icon.className = "game-hud-attribute-icon";
+            icon.setAttribute("aria-hidden", "true");
+            icon.textContent = attribute.icon;
+            label.appendChild(icon);
+        }
+        const labelText = document.createElement("span");
+        labelText.className = "game-hud-attribute-label";
+        labelText.textContent = attribute.label;
+        label.appendChild(labelText);
+
+        const value = document.createElement("dd");
+        value.dataset.hudVariable = attribute.variable;
+
+        row.append(label, value);
+        list.appendChild(row);
+    }
+    section.appendChild(list);
+    return section;
+}
+
+function setupGameHud() {
+    if (!gameHudElement || !gameHudButton) return;
+
+    gameHudElement.replaceChildren();
+    const hud = getHudConfig();
+    if (!hud) {
+        gameHudElement.hidden = true;
+        gameHudButton.hidden = true;
+        return;
+    }
+
+    const card = document.createElement("div");
+    card.className = "game-hud-card";
+
+    const hero = document.createElement("header");
+    hero.className = "game-hud-hero";
+
+    const emblem = document.createElement("span");
+    emblem.className = "game-hud-emblem";
+    emblem.setAttribute("aria-hidden", "true");
+    emblem.textContent = "✦";
+
+    const heroText = document.createElement("div");
+    const eyebrow = document.createElement("p");
+    eyebrow.className = "game-hud-eyebrow";
+    eyebrow.textContent = "Dobrodružný zápis";
+    const title = document.createElement("h2");
+    title.className = "game-hud-title";
+    title.textContent = "Stav postavy";
+    const description = document.createElement("p");
+    description.className = "game-hud-description";
+    description.textContent = "Tvoje rozhodnutia formujú cestu príbehom.";
+    heroText.append(eyebrow, title, description);
+    hero.append(emblem, heroText);
+    card.appendChild(hero);
+
+    const identityAttributes = hud.attributes.filter(attribute => attribute.identity);
+    const statAttributes = hud.attributes.filter(attribute => !attribute.identity);
+    if (identityAttributes.length) card.appendChild(createHudAttributesSection(identityAttributes, "Postava", "game-hud-identity-section"));
+    if (statAttributes.length) card.appendChild(createHudAttributesSection(statAttributes, "Vlastnosti", "game-hud-attributes-section"));
+
+    if (hud.inventory) {
+        const section = document.createElement("section");
+        section.className = "game-hud-section game-hud-inventory-section";
+        section.appendChild(createHudHeading(hud.inventory.label));
+
+        const list = document.createElement("ul");
+        list.className = "game-hud-inventory";
+        list.dataset.hudInventory = "true";
+        section.appendChild(list);
+        card.appendChild(section);
+    }
+
+    gameHudElement.appendChild(card);
+    gameHudElement.hidden = true;
+    gameHudButton.hidden = false;
+    gameHudButton.setAttribute("aria-expanded", "false");
+}
+
+function setGameHudOpen(open) {
+    if (!gameHudElement || !gameHudButton || gameHudButton.hidden) return;
+    gameHudElement.hidden = !open;
+    if (gameElement) gameElement.hidden = open;
+    gameHudButton.setAttribute("aria-expanded", String(open));
+    gameHudButton.textContent = open ? "Zavrieť stav" : "Stav";
+    if (open) gameHudElement.focus({ preventScroll: true });
+}
+
+function getStoryVariable(name) {
+    if (!story || !isValidVariableName(name)) return undefined;
+    try {
+        return story.variablesState[name];
+    } catch (_) {
+        return undefined;
+    }
+}
+
+function formatHudValue(value, emptyValue = "—") {
+    if (value === undefined || value === null || value === "") return emptyValue;
+    if (typeof value === "boolean") return value ? "Áno" : "Nie";
+    return String(value);
+}
+
+function getInkListItemLabels(value) {
+    if (!value || typeof value !== "object") return [];
+
+    if (Array.isArray(value.orderedItems)) {
+        return value.orderedItems
+            .map(item => item?.Key?.itemName)
+            .filter(name => typeof name === "string" && name.length > 0);
+    }
+
+    if (typeof value.toString === "function") {
+        const text = value.toString().trim();
+        return text ? text.split(",").map(item => item.trim()).filter(Boolean) : [];
+    }
+
+    return [];
+}
+
+function updateGameHud() {
+    if (!gameHudElement) return;
+
+    const hud = getHudConfig();
+    if (!hud) return;
+
+    for (const attribute of hud.attributes) {
+        const valueElement = gameHudElement.querySelector(`[data-hud-variable="${attribute.variable}"]`);
+        if (valueElement) valueElement.textContent = formatHudValue(getStoryVariable(attribute.variable), attribute.emptyValue);
+    }
+
+    if (!hud.inventory) return;
+    const list = gameHudElement.querySelector("[data-hud-inventory]");
+    if (!list) return;
+
+    const items = [];
+    if (hud.inventory.variable) items.push(...getInkListItemLabels(getStoryVariable(hud.inventory.variable)));
+    for (const item of hud.inventory.items) {
+        if (getStoryVariable(item.variable) === true) items.push(item.label);
+    }
+
+    list.replaceChildren();
+    if (!items.length) {
+        const empty = document.createElement("li");
+        empty.className = "game-hud-empty";
+        empty.textContent = hud.inventory.emptyLabel;
+        list.appendChild(empty);
+        return;
+    }
+
+    for (const item of items) {
+        const entry = document.createElement("li");
+        entry.textContent = item;
+        list.appendChild(entry);
+    }
+}
+
+>>>>>>> f20273d (Initial commit)
 async function loadBookTheme() {
     bookTheme = null;
 
@@ -328,8 +582,15 @@ function applyThemeConfig(theme) {
         "theme-pattern-geometric",
         "theme-pattern-parchment",
         "theme-pattern-cyber-grid",
+<<<<<<< HEAD
         "theme-pattern-noise"
     );
+=======
+        "theme-pattern-noise",
+        "theme-pattern-image"
+    );
+    root.style.removeProperty("--theme-pattern-image");
+>>>>>>> f20273d (Initial commit)
 
     const presetName = theme?.preset || "default";
     const preset = THEME_PRESETS[presetName] || THEME_PRESETS.default;
@@ -339,7 +600,11 @@ function applyThemeConfig(theme) {
     applyThemeModeColors();
 
     const typography = theme?.typography || {};
+<<<<<<< HEAD
     setVar("--story-font", normalizeFont(typography.storyFont, "serif"));
+=======
+    setVar("--story-font", normalizeFont(typography.storyFont, "sans-serif"));
+>>>>>>> f20273d (Initial commit)
     setVar("--ui-font", normalizeFont(typography.uiFont, "sans-serif"));
     setVar("--story-size", safeCssSize(typography.storySize, "19px"));
     setVar("--story-line-height", safeNumber(typography.lineHeight, 1.82));
@@ -355,6 +620,10 @@ function applyThemeConfig(theme) {
     setVar("--game-surface-opacity", clampNumber(bg.gameSurfaceOpacity, 0, 1, 0.96));
     setVar("--game-backdrop-blur", safeCssSize(bg.blur, "0px"));
     body.classList.toggle("theme-background-fixed", bg.fixed === true);
+<<<<<<< HEAD
+=======
+    applyThemePatternImage(bg);
+>>>>>>> f20273d (Initial commit)
 
     const choices = theme?.choices || {};
     setVar("--choice-radius", safeCssSize(choices.radius, "12px"));
@@ -394,6 +663,23 @@ function applyThemeModeColors() {
     }
 }
 
+<<<<<<< HEAD
+=======
+function applyThemePatternImage(background = {}) {
+    const filename = document.body.classList.contains("dark")
+        ? background.darkPatternImage
+        : background.patternImage;
+    const src = typeof filename === "string" && safeAssetName(filename) ? assetUrl(filename) : null;
+
+    document.body.classList.toggle("theme-pattern-image", Boolean(src));
+    if (src) {
+        setVar("--theme-pattern-image", `url("${src}")`);
+    } else {
+        document.documentElement.style.removeProperty("--theme-pattern-image");
+    }
+}
+
+>>>>>>> f20273d (Initial commit)
 function applyTextStyleConfig(styles) {
     const defaults = {
         player: {}, character: {}, thought: {}, system: {}, inscription: {}
@@ -406,7 +692,11 @@ function applyTextStyleConfig(styles) {
         setVar(`${prefix}-weight`, Number.isFinite(Number(cfg.weight)) ? String(cfg.weight) : "400");
         setVar(`${prefix}-align`, ["left", "center", "right"].includes(cfg.align) ? cfg.align : "left");
         setVar(`${prefix}-letter-spacing`, safeCssSize(cfg.letterSpacing, "0em"));
+<<<<<<< HEAD
         setVar(`${prefix}-font`, normalizeFont(cfg.font, type === "system" ? "monospace" : "inherit"));
+=======
+        setVar(`${prefix}-font`, normalizeFont(cfg.font, type === "system" ? "sans-serif" : "inherit"));
+>>>>>>> f20273d (Initial commit)
         setVar(`${prefix}-color`, colorToken(cfg.color || (cfg.accent ? "accent" : "text")));
         setVar(`${prefix}-surface`, colorToken(cfg.surface || "transparent"));
         setVar(`${prefix}-border`, cfg.borderLeft === true ? "var(--accent)" : "transparent");
@@ -429,7 +719,11 @@ function setVar(name, value) {
 }
 
 function normalizeFont(value, fallback) {
+<<<<<<< HEAD
     const allowed = ["serif", "sans-serif", "monospace", "inherit"];
+=======
+    const allowed = ["sans-serif", "inherit"];
+>>>>>>> f20273d (Initial commit)
     return allowed.includes(value) ? value : fallback;
 }
 
@@ -539,6 +833,11 @@ function render(savedDisplay = null) {
         choicesElement.appendChild(button);
     });
 
+<<<<<<< HEAD
+=======
+    updateGameHud();
+
+>>>>>>> f20273d (Initial commit)
     if (!story.canContinue && story.currentChoices.length === 0) showStoryEnd();
 }
 
@@ -561,7 +860,14 @@ function addAutomaticSceneImage(knotName) {
     });
     if (!illustration) return;
 
+<<<<<<< HEAD
     const filename = `${typeof illustration === "string" ? illustration : illustration.file || knotName}.webp`;
+=======
+    const configuredName = typeof illustration === "string" ? illustration : illustration.file || knotName;
+    const filename = /\.(?:webp|png|jpe?g)$/i.test(configuredName)
+        ? configuredName
+        : `${configuredName}.webp`;
+>>>>>>> f20273d (Initial commit)
     const src = assetUrl(filename);
     if (!src) return;
 
@@ -690,7 +996,10 @@ function showStoryEnd() {
             button.disabled = true;
             try {
                 await loadChapter(currentChapterIndex + 1, null, globalGameState);
+<<<<<<< HEAD
                 autosave();
+=======
+>>>>>>> f20273d (Initial commit)
                 scrollToStory();
             } catch (error) {
                 console.error("Ďalšiu kapitolu sa nepodarilo načítať:", error);
@@ -710,6 +1019,7 @@ function showStoryEnd() {
     choicesElement.appendChild(endElement);
 }
 
+<<<<<<< HEAD
 function getSaveKey() { return `ink-save-${bookId}`; }
 function getAutosaveKey() { return `ink-autosave-${bookId}`; }
 
@@ -757,6 +1067,10 @@ async function loadGame() {
     }
 }
 
+=======
+function getAutosaveKey() { return `ink-autosave-${bookId}`; }
+
+>>>>>>> f20273d (Initial commit)
 function autosave() {
     if (!story) return;
     try {
@@ -769,6 +1083,7 @@ function autosave() {
     }
 }
 
+<<<<<<< HEAD
 function restartGame() {
     if (!story) return;
     const confirmed = confirm("Naozaj chceš začať novú hru? Aktuálny postup bude vymazaný.");
@@ -778,12 +1093,18 @@ function restartGame() {
     window.location.reload();
 }
 
+=======
+>>>>>>> f20273d (Initial commit)
 function toggleTheme() {
     const dark = !document.body.classList.contains("dark");
     document.body.classList.toggle("dark", dark);
     localStorage.setItem("reader-theme", dark ? "dark" : "light");
     updateThemeButton();
     applyThemeModeColors();
+<<<<<<< HEAD
+=======
+    applyThemePatternImage(bookTheme?.background || {});
+>>>>>>> f20273d (Initial commit)
 }
 
 function loadTheme() {
@@ -804,7 +1125,11 @@ function updateThemeButton() {
 }
 
 function scrollToStory() {
+<<<<<<< HEAD
     const gameElement = document.getElementById("game");
+=======
+    if (gameElement?.hidden) setGameHudOpen(false);
+>>>>>>> f20273d (Initial commit)
     if (gameElement) gameElement.scrollIntoView({ behavior: "smooth", block: "start" });
     else window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -836,7 +1161,20 @@ function showFatalError(text) {
     }
 }
 
+<<<<<<< HEAD
 if (saveButton) saveButton.addEventListener("click", saveGame);
 if (loadButton) loadButton.addEventListener("click", loadGame);
 if (restartButton) restartButton.addEventListener("click", restartGame);
 if (themeButton) themeButton.addEventListener("click", toggleTheme);
+=======
+if (themeButton) themeButton.addEventListener("click", toggleTheme);
+if (gameHudButton) {
+    gameHudButton.addEventListener("click", () => setGameHudOpen(gameHudElement?.hidden));
+}
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && gameHudElement && !gameHudElement.hidden) {
+        setGameHudOpen(false);
+        gameHudButton?.focus();
+    }
+});
+>>>>>>> f20273d (Initial commit)

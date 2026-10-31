@@ -15,6 +15,10 @@
     --shadow: 0 12px 34px rgba(34, 45, 38, 0.08);
     --reading-width: 920px;
     --library-width: 1240px;
+<<<<<<< HEAD
+=======
+    --display-font: Georgia, "Times New Roman", serif;
+>>>>>>> f20273d (Initial commit)
 }
 
 body.dark {
@@ -42,6 +46,37 @@ html {
     scroll-behavior: smooth;
 }
 
+<<<<<<< HEAD
+=======
+/* Mobil a tablet: pri prirodzenom spomalení sa zachytia iba celé orientačné body,
+   nie každý odsek príbehu. Posúvanie preto zostáva voľné a čitateľné. */
+@media (hover: none) and (pointer: coarse) {
+    html {
+        scroll-snap-type: y proximity;
+        scroll-padding-top: 92px;
+    }
+
+    .reader-header,
+    .game-hud,
+    #story > .story-illustration,
+    #choices {
+        scroll-snap-align: start;
+        scroll-margin-top: 92px;
+    }
+
+    #choices {
+        scroll-snap-stop: normal;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+    }
+}
+
+>>>>>>> f20273d (Initial commit)
 body {
     margin: 0;
     min-height: 100vh;
@@ -92,10 +127,75 @@ a:focus-visible {
     gap: 20px;
 }
 
+<<<<<<< HEAD
+=======
+.reader-page .reader-heading {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+.reader-page .back-link,
+.reader-page .reader-actions {
+    position: fixed;
+    top: 22px;
+    z-index: 20;
+}
+
+.reader-page .back-link {
+    left: max(28px, calc((100vw - var(--library-width)) / 2 + 28px));
+    padding: 10px 0;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--background) 90%, transparent);
+    backdrop-filter: blur(14px);
+}
+
+.reader-page .reader-actions {
+    right: max(28px, calc((100vw - var(--library-width)) / 2 + 28px));
+    padding: 3px;
+    border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--background) 90%, transparent);
+    backdrop-filter: blur(14px);
+}
+
+>>>>>>> f20273d (Initial commit)
 .reader-heading {
     text-align: center;
 }
 
+<<<<<<< HEAD
+=======
+.reader-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hud-button {
+    min-height: 40px;
+    padding: 8px 13px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--accent-strong);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.hud-button:hover,
+.hud-button[aria-expanded="true"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.hud-button:active {
+    transform: scale(0.98);
+}
+
+>>>>>>> f20273d (Initial commit)
 .eyebrow {
     margin: 0 0 6px;
     color: var(--accent);
@@ -274,8 +374,12 @@ h1 {
 }
 
 .read-button,
+<<<<<<< HEAD
 .new-game-button,
 .reader-toolbar button {
+=======
+.new-game-button {
+>>>>>>> f20273d (Initial commit)
     min-height: 44px;
     border-radius: 11px;
     cursor: pointer;
@@ -316,6 +420,256 @@ h1 {
     padding: 24px 30px 88px;
 }
 
+<<<<<<< HEAD
+=======
+.game-hud {
+    width: min(1040px, 100%);
+    min-height: 60vh;
+    margin: 8px auto 48px;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+.game-hud[hidden] {
+    display: none;
+}
+
+.game-hud-card {
+    display: grid;
+    position: relative;
+    overflow: hidden;
+    min-height: 460px;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 100% 0, color-mix(in srgb, var(--accent) 16%, transparent), transparent 27rem),
+        radial-gradient(circle at 0 100%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 23rem),
+        var(--surface);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.14), inset 0 0 0 5px color-mix(in srgb, var(--surface-strong) 45%, transparent);
+}
+
+.game-hud-card::before,
+.game-hud-card::after {
+    position: absolute;
+    z-index: 0;
+    width: 210px;
+    height: 210px;
+    border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+    border-radius: 50%;
+    content: "";
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.game-hud-card::before {
+    top: -126px;
+    right: -78px;
+}
+
+.game-hud-card::after {
+    bottom: -150px;
+    left: -92px;
+}
+
+.game-hud-hero,
+.game-hud-section {
+    position: relative;
+    z-index: 1;
+}
+
+.game-hud-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 29px 31px 24px;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border));
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 72%, transparent), transparent);
+}
+
+.game-hud-emblem {
+    display: grid;
+    flex: 0 0 auto;
+    width: 50px;
+    height: 50px;
+    place-items: center;
+    border: 1px solid var(--accent);
+    border-radius: 16px 16px 24px 24px;
+    background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+    box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--accent-soft) 65%, transparent);
+    color: var(--accent-strong);
+    font-family: serif;
+    font-size: 26px;
+}
+
+.game-hud-eyebrow {
+    margin: 0 0 3px;
+    color: var(--accent-strong);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.game-hud-title {
+    margin: 0;
+    color: var(--text);
+    font-family: var(--display-font);
+    font-size: clamp(27px, 4vw, 36px);
+    line-height: 1.05;
+}
+
+.game-hud-description {
+    margin: 6px 0 0;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.game-hud-section {
+    min-width: 0;
+    padding: 25px 31px;
+}
+
+.game-hud-section + .game-hud-section {
+    border-top: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+}
+
+.game-hud-identity-section {
+    padding-top: 21px;
+    padding-bottom: 21px;
+    background: color-mix(in srgb, var(--accent-soft) 34%, transparent);
+}
+
+.game-hud-identity-section .game-hud-attributes {
+    grid-template-columns: 1fr;
+}
+
+.game-hud-identity-section .game-hud-attribute {
+    padding: 13px 15px;
+    border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--surface) 78%, transparent);
+}
+
+.game-hud-identity-section .game-hud-attribute dt {
+    color: var(--accent-strong);
+}
+
+.game-hud-identity-section .game-hud-attribute dd {
+    color: var(--accent-strong);
+    font-size: 25px;
+}
+
+.game-hud-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 15px;
+    color: var(--accent-strong);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.game-hud-heading::before {
+    width: 19px;
+    height: 1px;
+    background: var(--accent);
+    content: "";
+}
+
+.game-hud-attributes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    column-gap: 32px;
+    margin: 0;
+}
+
+.game-hud-attribute {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    min-width: 0;
+    padding: 11px 0 9px;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+}
+
+.game-hud-attribute-wide {
+    grid-column: 1 / -1;
+}
+
+.game-hud-attribute dt {
+    display: block;
+    overflow: hidden;
+    color: var(--secondary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.game-hud-attribute-icon {
+    display: inline-grid;
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    place-items: center;
+    color: var(--accent-strong);
+    font-size: 13px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.game-hud-attribute dd {
+    margin: 0;
+    color: var(--text);
+    font-family: var(--story-font, serif);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: right;
+}
+
+.game-hud-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.game-hud-inventory li:not(.game-hud-empty) {
+    position: relative;
+    padding: 8px 12px 8px 29px;
+    border: 1px solid color-mix(in srgb, var(--accent) 48%, var(--border));
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--accent-soft) 75%, var(--surface));
+    color: var(--accent-strong);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.game-hud-inventory li:not(.game-hud-empty)::before {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    color: var(--accent);
+    content: "◆";
+    font-size: 10px;
+    transform: translateY(-50%);
+}
+
+.game-hud-inventory .game-hud-empty {
+    color: var(--secondary);
+    font-size: 13px;
+    font-style: italic;
+}
+
+>>>>>>> f20273d (Initial commit)
 #story {
     width: 100%;
     font-family: serif;
@@ -374,20 +728,29 @@ h1 {
 
 .choice:active,
 .read-button:active,
+<<<<<<< HEAD
 .new-game-button:active,
 .reader-toolbar button:active {
+=======
+.new-game-button:active {
+>>>>>>> f20273d (Initial commit)
     transform: scale(0.99);
 }
 
 .story-end {
     padding: 18px 0 8px;
     color: var(--accent-strong);
+<<<<<<< HEAD
     font-family: serif;
+=======
+    font-family: var(--display-font);
+>>>>>>> f20273d (Initial commit)
     font-size: 23px;
     font-weight: 700;
     text-align: center;
 }
 
+<<<<<<< HEAD
 .reader-toolbar {
     position: sticky;
     bottom: 0;
@@ -424,11 +787,17 @@ h1 {
     background: var(--accent-soft);
 }
 
+=======
+>>>>>>> f20273d (Initial commit)
 #message {
     position: fixed;
     z-index: 30;
     left: 50%;
+<<<<<<< HEAD
     bottom: 82px;
+=======
+    bottom: 24px;
+>>>>>>> f20273d (Initial commit)
     transform: translateX(-50%);
     max-width: calc(100% - 36px);
     padding: 10px 17px;
@@ -495,6 +864,19 @@ h1 {
         text-overflow: ellipsis;
     }
 
+<<<<<<< HEAD
+=======
+    .reader-actions {
+        gap: 6px;
+    }
+
+    .hud-button {
+        min-height: 38px;
+        padding: 7px 10px;
+        font-size: 13px;
+    }
+
+>>>>>>> f20273d (Initial commit)
     .back-link {
         width: 42px;
         overflow: hidden;
@@ -511,6 +893,20 @@ h1 {
         font-size: 24px;
     }
 
+<<<<<<< HEAD
+=======
+    .reader-page .back-link {
+        top: 17px;
+        left: 18px;
+        padding: 7px 0;
+    }
+
+    .reader-page .reader-actions {
+        top: 14px;
+        right: 14px;
+    }
+
+>>>>>>> f20273d (Initial commit)
     #library {
         padding: 10px 18px 72px;
         grid-template-columns: 1fr;
@@ -557,6 +953,14 @@ h1 {
         padding: 14px 20px 112px;
     }
 
+<<<<<<< HEAD
+=======
+    .game-hud {
+        padding: 0 20px;
+        margin-top: 2px;
+    }
+
+>>>>>>> f20273d (Initial commit)
     #story {
         font-size: 18px;
         line-height: 1.76;
@@ -577,11 +981,14 @@ h1 {
         font-size: 15px;
     }
 
+<<<<<<< HEAD
     .reader-toolbar button {
         flex: 1;
         padding: 11px 8px;
         font-size: 13px;
     }
+=======
+>>>>>>> f20273d (Initial commit)
 }
 
 @media (max-width: 440px) {
@@ -598,15 +1005,50 @@ h1 {
         padding-right: 16px;
     }
 
+<<<<<<< HEAD
+=======
+    .game-hud {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .game-hud-card {
+        min-height: 0;
+        border-radius: 16px;
+    }
+
+    .game-hud-hero {
+        padding: 22px 20px 19px;
+    }
+
+    .game-hud-emblem {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px 13px 20px 20px;
+        font-size: 22px;
+    }
+
+    .game-hud-description {
+        font-size: 13px;
+    }
+
+    .game-hud-section {
+        padding: 21px 20px;
+    }
+
+>>>>>>> f20273d (Initial commit)
     #story {
         font-size: 17px;
     }
 
+<<<<<<< HEAD
     .reader-toolbar {
         gap: 6px;
         padding-left: 8px;
         padding-right: 8px;
     }
+=======
+>>>>>>> f20273d (Initial commit)
 }
 
 @media (min-width: 1400px) {
@@ -976,6 +1418,131 @@ body.theme-pattern-noise {
         repeating-radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--accent) 3%, transparent) 0 1px, transparent 1px 4px),
         linear-gradient(135deg, rgba(0,0,0,.03), transparent 45%, rgba(255,255,255,.015));
 }
+<<<<<<< HEAD
+=======
+
+/* Textúra sa ukladá až po jemnom farebnom závoji, aby ostal príbeh čitateľný. */
+body.theme-pattern-image {
+    background-color: var(--background);
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--background) 76%, transparent), color-mix(in srgb, var(--background) 76%, transparent)),
+        var(--theme-pattern-image);
+    background-position: center, center;
+    background-repeat: repeat, repeat;
+    background-size: auto, var(--theme-pattern-size);
+}
+
+body.dark.theme-pattern-image {
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--background) 70%, transparent), color-mix(in srgb, var(--background) 70%, transparent)),
+        var(--theme-pattern-image);
+}
+
+/* Vaelgard: pergamen cez deň, kamenistá sieň akadémie po zotmení. */
+body.book-vaelgard #game {
+    border: 1px solid color-mix(in srgb, var(--accent) 58%, var(--border));
+    border-radius: 26px;
+    background:
+        linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 32%, transparent), transparent 11%, transparent 89%, color-mix(in srgb, var(--accent-soft) 32%, transparent)),
+        var(--surface);
+    box-shadow:
+        0 15px 34px rgba(53, 34, 14, 0.18),
+        inset 0 0 0 5px color-mix(in srgb, var(--surface-strong) 54%, transparent),
+        inset 0 0 0 6px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+body.book-vaelgard #story::before {
+    display: block;
+    width: min(220px, 64%);
+    height: 9px;
+    margin: 0 auto 26px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    content: "✦";
+    color: var(--accent-strong);
+    font-family: var(--display-font);
+    font-size: 13px;
+    line-height: 7px;
+    text-align: center;
+}
+
+body.book-vaelgard .choice {
+    border-color: color-mix(in srgb, var(--accent) 54%, var(--border));
+    border-left-color: var(--accent);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--choice) 91%, var(--surface));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface-strong) 58%, transparent);
+}
+
+body.book-vaelgard .choice:hover {
+    background: var(--choice-hover);
+    border-color: var(--accent-strong);
+}
+
+body.book-vaelgard .story-image {
+    border-radius: 18px;
+    border-color: color-mix(in srgb, var(--accent) 64%, var(--border));
+    box-shadow: 0 10px 22px rgba(47, 30, 14, 0.22), inset 0 0 0 3px var(--surface);
+}
+
+body.book-vaelgard .game-hud-card {
+    border-color: color-mix(in srgb, var(--accent) 68%, var(--border));
+    border-radius: 28px;
+    background:
+        linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 58%, transparent), transparent 38%, transparent 62%, color-mix(in srgb, var(--accent-soft) 58%, transparent)),
+        var(--surface);
+    box-shadow:
+        0 16px 38px rgba(53, 34, 14, 0.2),
+        inset 0 0 0 5px color-mix(in srgb, var(--surface-strong) 55%, transparent),
+        inset 0 0 0 6px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+body.book-vaelgard .game-hud-card::before,
+body.book-vaelgard .game-hud-card::after {
+    width: 158px;
+    height: 22px;
+    border-width: 1px 0;
+    border-radius: 0;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 38%, transparent), transparent);
+}
+
+body.book-vaelgard .game-hud-card::before {
+    top: 12px;
+    right: 22px;
+}
+
+body.book-vaelgard .game-hud-card::after {
+    bottom: 12px;
+    left: 22px;
+}
+
+body.book-vaelgard .game-hud-hero {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-soft) 76%, transparent), transparent 72%);
+}
+
+body.book-vaelgard .game-hud-emblem {
+    border-radius: 18px;
+    background: var(--choice);
+    box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--accent-soft) 72%, transparent);
+}
+
+body.book-vaelgard .game-hud-heading::before,
+body.book-vaelgard .game-hud-heading::after {
+    width: 19px;
+    height: 1px;
+    background: var(--accent);
+    content: "";
+}
+
+body.book-vaelgard .game-hud-identity-section {
+    background: color-mix(in srgb, var(--accent-soft) 45%, transparent);
+}
+
+body.book-vaelgard .game-hud-identity-section .game-hud-attribute {
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--choice) 72%, var(--surface));
+}
+>>>>>>> f20273d (Initial commit)
 body.has-scene-background { background-image: var(--scene-background); background-size: cover; background-position: center; }
 
 .story-player,
@@ -1094,7 +1661,11 @@ body.text-thought-uppercase .story-thought { text-transform: uppercase; }
 .install-help-card h2 {
     margin: 0 40px 10px 0;
     color: var(--accent);
+<<<<<<< HEAD
     font-family: var(--story-font, serif);
+=======
+    font-family: var(--display-font);
+>>>>>>> f20273d (Initial commit)
 }
 
 .install-help-card p {

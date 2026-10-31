@@ -29,7 +29,11 @@
     "choiceHover": "#352d42"
   },
   "typography": {
+<<<<<<< HEAD
     "storyFont": "serif",
+=======
+    "storyFont": "sans-serif",
+>>>>>>> f20273d (Initial commit)
     "uiFont": "sans-serif",
     "storySize": "19px",
     "lineHeight": 1.82,
@@ -42,7 +46,13 @@
   },
   "background": {
     "pattern": "geometric",
+<<<<<<< HEAD
     "patternSize": "84px 144px",
+=======
+    "patternImage": "pattern-light.svg",
+    "darkPatternImage": "pattern-dark.svg",
+    "patternSize": "256px 256px",
+>>>>>>> f20273d (Initial commit)
     "fixed": true,
     "gameSurfaceOpacity": 0.92,
     "blur": "5px"
@@ -76,12 +86,20 @@
       "color": "secondary"
     },
     "system": {
+<<<<<<< HEAD
       "font": "monospace",
+=======
+      "font": "sans-serif",
+>>>>>>> f20273d (Initial commit)
       "uppercase": true,
       "color": "accentStrong"
     },
     "inscription": {
+<<<<<<< HEAD
       "font": "serif",
+=======
+      "font": "sans-serif",
+>>>>>>> f20273d (Initial commit)
       "weight": 700,
       "align": "center",
       "letterSpacing": "0.08em",

@@ -5,6 +5,10 @@
   "main": "game.js",
   "scripts": {
     "compile:ink": "./scripts/compile-ink.sh && node ./scripts/update-precache-version.js",
+<<<<<<< HEAD
+=======
+    "import:vaelgard-art": "bash ./scripts/import-vaelgard-chapter-art.sh",
+>>>>>>> f20273d (Initial commit)
     "update:precache": "node ./scripts/update-precache-version.js",
     "verify": "node ./scripts/verify.js",
     "test": "npm run verify"
