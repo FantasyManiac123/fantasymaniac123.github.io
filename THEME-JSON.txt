@@ -16,10 +16,7 @@ Theme JSON môže meniť:
 - typography
 - layout
 - background.pattern
-<<<<<<< HEAD
-=======
 - background.patternImage / background.darkPatternImage
->>>>>>> f20273d (Initial commit)
 - choices
 - illustrations
 - textStyles
@@ -47,8 +44,6 @@ Príklad minimálnej cyberpunk témy:
     "fixed": true
   }
 }
-<<<<<<< HEAD
-=======
 
 Vlastný obrázkový vzor pozadia
 -------------------------------
@@ -63,4 +58,3 @@ jednej dlaždice.
   "patternSize": "256px 256px",
   "fixed": true
 }
->>>>>>> f20273d (Initial commit)

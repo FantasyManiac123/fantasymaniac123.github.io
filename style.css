@@ -15,10 +15,7 @@
     --shadow: 0 12px 34px rgba(34, 45, 38, 0.08);
     --reading-width: 920px;
     --library-width: 1240px;
-<<<<<<< HEAD
-=======
     --display-font: Georgia, "Times New Roman", serif;
->>>>>>> f20273d (Initial commit)
 }
 
 body.dark {
@@ -46,8 +43,6 @@ html {
     scroll-behavior: smooth;
 }
 
-<<<<<<< HEAD
-=======
 /* Mobil a tablet: pri prirodzenom spomalení sa zachytia iba celé orientačné body,
    nie každý odsek príbehu. Posúvanie preto zostáva voľné a čitateľné. */
 @media (hover: none) and (pointer: coarse) {
@@ -76,7 +71,6 @@ html {
     }
 }
 
->>>>>>> f20273d (Initial commit)
 body {
     margin: 0;
     min-height: 100vh;
@@ -127,8 +121,6 @@ a:focus-visible {
     gap: 20px;
 }
 
-<<<<<<< HEAD
-=======
 .reader-page .reader-heading {
     grid-column: 1 / -1;
     grid-row: 1;
@@ -158,13 +150,10 @@ a:focus-visible {
     backdrop-filter: blur(14px);
 }
 
->>>>>>> f20273d (Initial commit)
 .reader-heading {
     text-align: center;
 }
 
-<<<<<<< HEAD
-=======
 .reader-actions {
     justify-self: end;
     display: flex;
@@ -195,7 +184,6 @@ a:focus-visible {
     transform: scale(0.98);
 }
 
->>>>>>> f20273d (Initial commit)
 .eyebrow {
     margin: 0 0 6px;
     color: var(--accent);
@@ -374,12 +362,7 @@ h1 {
 }
 
 .read-button,
-<<<<<<< HEAD
-.new-game-button,
-.reader-toolbar button {
-=======
 .new-game-button {
->>>>>>> f20273d (Initial commit)
     min-height: 44px;
     border-radius: 11px;
     cursor: pointer;
@@ -420,8 +403,6 @@ h1 {
     padding: 24px 30px 88px;
 }
 
-<<<<<<< HEAD
-=======
 .game-hud {
     width: min(1040px, 100%);
     min-height: 60vh;
@@ -669,7 +650,6 @@ h1 {
     font-style: italic;
 }
 
->>>>>>> f20273d (Initial commit)
 #story {
     width: 100%;
     font-family: serif;
@@ -728,76 +708,24 @@ h1 {
 
 .choice:active,
 .read-button:active,
-<<<<<<< HEAD
-.new-game-button:active,
-.reader-toolbar button:active {
-=======
 .new-game-button:active {
->>>>>>> f20273d (Initial commit)
     transform: scale(0.99);
 }
 
 .story-end {
     padding: 18px 0 8px;
     color: var(--accent-strong);
-<<<<<<< HEAD
-    font-family: serif;
-=======
     font-family: var(--display-font);
->>>>>>> f20273d (Initial commit)
     font-size: 23px;
     font-weight: 700;
     text-align: center;
 }
 
-<<<<<<< HEAD
-.reader-toolbar {
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 13px 20px max(13px, env(safe-area-inset-bottom));
-    border-top: 1px solid var(--border);
-    background: color-mix(in srgb, var(--surface) 92%, transparent);
-    backdrop-filter: blur(12px);
-}
-
-.reader-toolbar button {
-    padding: 10px 18px;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: var(--accent-contrast);
-    font-weight: 800;
-}
-
-.reader-toolbar button:hover {
-    background: var(--accent-strong);
-}
-
-.reader-toolbar .secondary-action {
-    border-color: var(--border);
-    background: var(--surface);
-    color: var(--text);
-}
-
-.reader-toolbar .secondary-action:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-}
-
-=======
->>>>>>> f20273d (Initial commit)
 #message {
     position: fixed;
     z-index: 30;
     left: 50%;
-<<<<<<< HEAD
-    bottom: 82px;
-=======
     bottom: 24px;
->>>>>>> f20273d (Initial commit)
     transform: translateX(-50%);
     max-width: calc(100% - 36px);
     padding: 10px 17px;
@@ -864,8 +792,6 @@ h1 {
         text-overflow: ellipsis;
     }
 
-<<<<<<< HEAD
-=======
     .reader-actions {
         gap: 6px;
     }
@@ -876,7 +802,6 @@ h1 {
         font-size: 13px;
     }
 
->>>>>>> f20273d (Initial commit)
     .back-link {
         width: 42px;
         overflow: hidden;
@@ -893,8 +818,6 @@ h1 {
         font-size: 24px;
     }
 
-<<<<<<< HEAD
-=======
     .reader-page .back-link {
         top: 17px;
         left: 18px;
@@ -906,7 +829,6 @@ h1 {
         right: 14px;
     }
 
->>>>>>> f20273d (Initial commit)
     #library {
         padding: 10px 18px 72px;
         grid-template-columns: 1fr;
@@ -953,14 +875,11 @@ h1 {
         padding: 14px 20px 112px;
     }
 
-<<<<<<< HEAD
-=======
     .game-hud {
         padding: 0 20px;
         margin-top: 2px;
     }
 
->>>>>>> f20273d (Initial commit)
     #story {
         font-size: 18px;
         line-height: 1.76;
@@ -981,14 +900,6 @@ h1 {
         font-size: 15px;
     }
 
-<<<<<<< HEAD
-    .reader-toolbar button {
-        flex: 1;
-        padding: 11px 8px;
-        font-size: 13px;
-    }
-=======
->>>>>>> f20273d (Initial commit)
 }
 
 @media (max-width: 440px) {
@@ -1005,8 +916,6 @@ h1 {
         padding-right: 16px;
     }
 
-<<<<<<< HEAD
-=======
     .game-hud {
         padding-left: 16px;
         padding-right: 16px;
@@ -1036,19 +945,10 @@ h1 {
         padding: 21px 20px;
     }
 
->>>>>>> f20273d (Initial commit)
     #story {
         font-size: 17px;
     }
 
-<<<<<<< HEAD
-    .reader-toolbar {
-        gap: 6px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-=======
->>>>>>> f20273d (Initial commit)
 }
 
 @media (min-width: 1400px) {
@@ -1418,8 +1318,6 @@ body.theme-pattern-noise {
         repeating-radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--accent) 3%, transparent) 0 1px, transparent 1px 4px),
         linear-gradient(135deg, rgba(0,0,0,.03), transparent 45%, rgba(255,255,255,.015));
 }
-<<<<<<< HEAD
-=======
 
 /* Textúra sa ukladá až po jemnom farebnom závoji, aby ostal príbeh čitateľný. */
 body.theme-pattern-image {
@@ -1542,7 +1440,6 @@ body.book-vaelgard .game-hud-identity-section .game-hud-attribute {
     border-radius: 14px;
     background: color-mix(in srgb, var(--choice) 72%, var(--surface));
 }
->>>>>>> f20273d (Initial commit)
 body.has-scene-background { background-image: var(--scene-background); background-size: cover; background-position: center; }
 
 .story-player,
@@ -1572,6 +1469,15 @@ body.has-scene-background { background-image: var(--scene-background); backgroun
     background: var(--text-character-surface);
     border-left-color: var(--text-character-border);
 }
+
+/* Priama reč tvorí samostatné repliky, aby sa v rozhovore nestrácali. */
+#story > .story-character:not(:first-child),
+#story > .story-player:not(:first-child) {
+    margin-top: 1.55em;
+    padding-top: 1.05em;
+    border-top: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border));
+}
+
 .story-thought {
     font-family: var(--text-thought-font);
     font-style: var(--text-thought-font-style);
@@ -1661,11 +1567,7 @@ body.text-thought-uppercase .story-thought { text-transform: uppercase; }
 .install-help-card h2 {
     margin: 0 40px 10px 0;
     color: var(--accent);
-<<<<<<< HEAD
-    font-family: var(--story-font, serif);
-=======
     font-family: var(--display-font);
->>>>>>> f20273d (Initial commit)
 }
 
 .install-help-card p {

@@ -8,12 +8,6 @@
   "cover": "cover.webp",
   "theme": "theme.json",
   "illustrations": [
-<<<<<<< HEAD
-    { "chapter": "chapter-01", "knot": "zaciatok", "file": "zaciatok" },
-    "vzlet",
-    { "chapter": "chapter-08", "knot": "teleskop", "file": "observatorium" }
-  ],
-=======
     { "chapter": "chapter-01", "knot": "zaciatok", "file": "chapter-01.png" },
     { "chapter": "chapter-02", "knot": "zaciatok", "file": "chapter-02.png" },
     { "chapter": "chapter-03", "knot": "zaciatok", "file": "chapter-03.png" },
@@ -39,7 +33,6 @@
       { "variable": "drak", "label": "Drak", "icon": "🐉", "emptyValue": "Ešte nevybraný", "wide": true, "identity": true }
     ]
   },
->>>>>>> f20273d (Initial commit)
   "globalVariables": [
     "odvaha",
     "rozum",

@@ -10,23 +10,14 @@ let globalGameState = {};
 
 const storyElement = document.getElementById("story");
 const choicesElement = document.getElementById("choices");
-<<<<<<< HEAD
-const saveButton = document.getElementById("saveButton");
-const loadButton = document.getElementById("loadButton");
-const restartButton = document.getElementById("restartButton");
-=======
->>>>>>> f20273d (Initial commit)
 const themeButton = document.getElementById("themeButton");
 const messageElement = document.getElementById("message");
 const titleElement = document.getElementById("bookTitle");
 const subtitleElement = document.getElementById("bookSubtitle");
 const chapterTitleElement = document.getElementById("chapterTitle");
-<<<<<<< HEAD
-=======
 const gameHudElement = document.getElementById("gameHud");
 const gameHudButton = document.getElementById("gameHudButton");
 const gameElement = document.getElementById("game");
->>>>>>> f20273d (Initial commit)
 
 const moonIcon = `
 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -64,10 +55,7 @@ async function init() {
         bookMetadata = await metadataResponse.json();
         setBookMetadata();
         await loadBookTheme();
-<<<<<<< HEAD
-=======
         setupGameHud();
->>>>>>> f20273d (Initial commit)
 
         chapterMode = Array.isArray(bookMetadata.chapters) && bookMetadata.chapters.length > 0;
 
@@ -153,10 +141,7 @@ async function loadSingleStory() {
 
     updateChapterTitle();
     render(savedDisplay);
-<<<<<<< HEAD
-=======
     autosave();
->>>>>>> f20273d (Initial commit)
 }
 
 async function loadChapter(index, inkState = null, globals = null, display = null) {
@@ -185,10 +170,7 @@ async function loadChapter(index, inkState = null, globals = null, display = nul
     captureGlobalState();
     updateChapterTitle();
     render(display);
-<<<<<<< HEAD
-=======
     autosave();
->>>>>>> f20273d (Initial commit)
 }
 
 function updateChapterTitle() {
@@ -296,19 +278,14 @@ function buildChapterSave() {
 
 function setBookMetadata() {
     if (!bookMetadata) return;
-<<<<<<< HEAD
-=======
     document.body.dataset.bookId = bookId;
     document.body.classList.add(`book-${bookId}`);
->>>>>>> f20273d (Initial commit)
     document.title = bookMetadata.title || "Gamebook";
     document.documentElement.lang = bookMetadata.language || "sk";
     if (titleElement) titleElement.textContent = bookMetadata.title || "Gamebook";
     if (subtitleElement) subtitleElement.textContent = bookMetadata.author || "Interaktívny príbeh";
 }
 
-<<<<<<< HEAD
-=======
 function isValidVariableName(value) {
     return typeof value === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
 }
@@ -534,7 +511,6 @@ function updateGameHud() {
     }
 }
 
->>>>>>> f20273d (Initial commit)
 async function loadBookTheme() {
     bookTheme = null;
 
@@ -582,15 +558,10 @@ function applyThemeConfig(theme) {
         "theme-pattern-geometric",
         "theme-pattern-parchment",
         "theme-pattern-cyber-grid",
-<<<<<<< HEAD
-        "theme-pattern-noise"
-    );
-=======
         "theme-pattern-noise",
         "theme-pattern-image"
     );
     root.style.removeProperty("--theme-pattern-image");
->>>>>>> f20273d (Initial commit)
 
     const presetName = theme?.preset || "default";
     const preset = THEME_PRESETS[presetName] || THEME_PRESETS.default;
@@ -600,11 +571,7 @@ function applyThemeConfig(theme) {
     applyThemeModeColors();
 
     const typography = theme?.typography || {};
-<<<<<<< HEAD
-    setVar("--story-font", normalizeFont(typography.storyFont, "serif"));
-=======
     setVar("--story-font", normalizeFont(typography.storyFont, "sans-serif"));
->>>>>>> f20273d (Initial commit)
     setVar("--ui-font", normalizeFont(typography.uiFont, "sans-serif"));
     setVar("--story-size", safeCssSize(typography.storySize, "19px"));
     setVar("--story-line-height", safeNumber(typography.lineHeight, 1.82));
@@ -620,10 +587,7 @@ function applyThemeConfig(theme) {
     setVar("--game-surface-opacity", clampNumber(bg.gameSurfaceOpacity, 0, 1, 0.96));
     setVar("--game-backdrop-blur", safeCssSize(bg.blur, "0px"));
     body.classList.toggle("theme-background-fixed", bg.fixed === true);
-<<<<<<< HEAD
-=======
     applyThemePatternImage(bg);
->>>>>>> f20273d (Initial commit)
 
     const choices = theme?.choices || {};
     setVar("--choice-radius", safeCssSize(choices.radius, "12px"));
@@ -663,8 +627,6 @@ function applyThemeModeColors() {
     }
 }
 
-<<<<<<< HEAD
-=======
 function applyThemePatternImage(background = {}) {
     const filename = document.body.classList.contains("dark")
         ? background.darkPatternImage
@@ -679,7 +641,6 @@ function applyThemePatternImage(background = {}) {
     }
 }
 
->>>>>>> f20273d (Initial commit)
 function applyTextStyleConfig(styles) {
     const defaults = {
         player: {}, character: {}, thought: {}, system: {}, inscription: {}
@@ -692,11 +653,7 @@ function applyTextStyleConfig(styles) {
         setVar(`${prefix}-weight`, Number.isFinite(Number(cfg.weight)) ? String(cfg.weight) : "400");
         setVar(`${prefix}-align`, ["left", "center", "right"].includes(cfg.align) ? cfg.align : "left");
         setVar(`${prefix}-letter-spacing`, safeCssSize(cfg.letterSpacing, "0em"));
-<<<<<<< HEAD
-        setVar(`${prefix}-font`, normalizeFont(cfg.font, type === "system" ? "monospace" : "inherit"));
-=======
         setVar(`${prefix}-font`, normalizeFont(cfg.font, type === "system" ? "sans-serif" : "inherit"));
->>>>>>> f20273d (Initial commit)
         setVar(`${prefix}-color`, colorToken(cfg.color || (cfg.accent ? "accent" : "text")));
         setVar(`${prefix}-surface`, colorToken(cfg.surface || "transparent"));
         setVar(`${prefix}-border`, cfg.borderLeft === true ? "var(--accent)" : "transparent");
@@ -719,11 +676,7 @@ function setVar(name, value) {
 }
 
 function normalizeFont(value, fallback) {
-<<<<<<< HEAD
-    const allowed = ["serif", "sans-serif", "monospace", "inherit"];
-=======
     const allowed = ["sans-serif", "inherit"];
->>>>>>> f20273d (Initial commit)
     return allowed.includes(value) ? value : fallback;
 }
 
@@ -833,11 +786,8 @@ function render(savedDisplay = null) {
         choicesElement.appendChild(button);
     });
 
-<<<<<<< HEAD
-=======
     updateGameHud();
 
->>>>>>> f20273d (Initial commit)
     if (!story.canContinue && story.currentChoices.length === 0) showStoryEnd();
 }
 
@@ -860,14 +810,10 @@ function addAutomaticSceneImage(knotName) {
     });
     if (!illustration) return;
 
-<<<<<<< HEAD
-    const filename = `${typeof illustration === "string" ? illustration : illustration.file || knotName}.webp`;
-=======
     const configuredName = typeof illustration === "string" ? illustration : illustration.file || knotName;
     const filename = /\.(?:webp|png|jpe?g)$/i.test(configuredName)
         ? configuredName
         : `${configuredName}.webp`;
->>>>>>> f20273d (Initial commit)
     const src = assetUrl(filename);
     if (!src) return;
 
@@ -996,10 +942,6 @@ function showStoryEnd() {
             button.disabled = true;
             try {
                 await loadChapter(currentChapterIndex + 1, null, globalGameState);
-<<<<<<< HEAD
-                autosave();
-=======
->>>>>>> f20273d (Initial commit)
                 scrollToStory();
             } catch (error) {
                 console.error("Ďalšiu kapitolu sa nepodarilo načítať:", error);
@@ -1019,58 +961,8 @@ function showStoryEnd() {
     choicesElement.appendChild(endElement);
 }
 
-<<<<<<< HEAD
-function getSaveKey() { return `ink-save-${bookId}`; }
 function getAutosaveKey() { return `ink-autosave-${bookId}`; }
 
-function saveGame() {
-    if (!story) return;
-    try {
-        const value = chapterMode
-            ? JSON.stringify(buildChapterSave())
-            : JSON.stringify(buildSingleSave());
-        localStorage.setItem(getSaveKey(), value);
-        showMessage("Hra uložená");
-    } catch (error) {
-        console.error("Chyba pri ukladaní:", error);
-        showMessage("Hru sa nepodarilo uložiť");
-    }
-}
-
-async function loadGame() {
-    if (!story) return;
-    const saveData = localStorage.getItem(getSaveKey());
-    if (!saveData) {
-        showMessage("Žiadna manuálne uložená hra");
-        return;
-    }
-
-    try {
-        if (chapterMode) {
-            const saved = parseChapterSave(saveData);
-            if (!saved) throw new Error("Uložená hra používa starý alebo nekompatibilný formát.");
-            globalGameState = saved.globals || {};
-            await loadChapter(saved.chapterIndex, saved.inkState, globalGameState, saved.display);
-        } else {
-            const saved = parseSingleSave(saveData);
-            if (!saved) throw new Error("Uložená hra používa starý alebo nekompatibilný formát.");
-            story.state.LoadJson(saved.inkState);
-            render(saved.display);
-        }
-
-        autosave();
-        scrollToStory();
-        showMessage("Hra načítaná");
-    } catch (error) {
-        console.error("Chyba pri načítaní:", error);
-        showMessage("Uloženú hru sa nepodarilo načítať");
-    }
-}
-
-=======
-function getAutosaveKey() { return `ink-autosave-${bookId}`; }
-
->>>>>>> f20273d (Initial commit)
 function autosave() {
     if (!story) return;
     try {
@@ -1083,28 +975,13 @@ function autosave() {
     }
 }
 
-<<<<<<< HEAD
-function restartGame() {
-    if (!story) return;
-    const confirmed = confirm("Naozaj chceš začať novú hru? Aktuálny postup bude vymazaný.");
-    if (!confirmed) return;
-    localStorage.removeItem(getAutosaveKey());
-    localStorage.removeItem(getSaveKey());
-    window.location.reload();
-}
-
-=======
->>>>>>> f20273d (Initial commit)
 function toggleTheme() {
     const dark = !document.body.classList.contains("dark");
     document.body.classList.toggle("dark", dark);
     localStorage.setItem("reader-theme", dark ? "dark" : "light");
     updateThemeButton();
     applyThemeModeColors();
-<<<<<<< HEAD
-=======
     applyThemePatternImage(bookTheme?.background || {});
->>>>>>> f20273d (Initial commit)
 }
 
 function loadTheme() {
@@ -1125,11 +1002,7 @@ function updateThemeButton() {
 }
 
 function scrollToStory() {
-<<<<<<< HEAD
-    const gameElement = document.getElementById("game");
-=======
     if (gameElement?.hidden) setGameHudOpen(false);
->>>>>>> f20273d (Initial commit)
     if (gameElement) gameElement.scrollIntoView({ behavior: "smooth", block: "start" });
     else window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1161,12 +1034,6 @@ function showFatalError(text) {
     }
 }
 
-<<<<<<< HEAD
-if (saveButton) saveButton.addEventListener("click", saveGame);
-if (loadButton) loadButton.addEventListener("click", loadGame);
-if (restartButton) restartButton.addEventListener("click", restartGame);
-if (themeButton) themeButton.addEventListener("click", toggleTheme);
-=======
 if (themeButton) themeButton.addEventListener("click", toggleTheme);
 if (gameHudButton) {
     gameHudButton.addEventListener("click", () => setGameHudOpen(gameHudElement?.hidden));
@@ -1177,4 +1044,3 @@ document.addEventListener("keydown", event => {
         gameHudButton?.focus();
     }
 });
->>>>>>> f20273d (Initial commit)

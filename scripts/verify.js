@@ -40,8 +40,6 @@ function isSafeRelativePath(value) {
         && !value.startsWith("/");
 }
 
-<<<<<<< HEAD
-=======
 function isValidVariableName(value) {
     return typeof value === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
 }
@@ -148,7 +146,6 @@ function verifyTheme(bookPath, bookId, book) {
     }
 }
 
->>>>>>> f20273d (Initial commit)
 function continueUntilChoiceOrEnd(story, relativePath) {
     let linesRead = 0;
     while (story.canContinue) {
@@ -203,37 +200,23 @@ function verifyBooks() {
         if (typeof book.version !== "string" || book.version.length === 0) fail(`${bookPath} nemá verziu pre kompatibilitu saveov.`);
 
         const globalVariables = Array.isArray(book.globalVariables) ? book.globalVariables : [];
-<<<<<<< HEAD
-        if (!globalVariables.every(name => typeof name === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(name))) {
-            fail(`${bookPath} obsahuje neplatnú globálnu premennú.`);
-        }
-=======
         if (!globalVariables.every(isValidVariableName)) {
             fail(`${bookPath} obsahuje neplatnú globálnu premennú.`);
         }
         verifyHud(bookPath, book, globalVariables);
         verifyTheme(bookPath, entry.id, book);
->>>>>>> f20273d (Initial commit)
 
         const illustrations = Array.isArray(book.illustrations) ? book.illustrations : [];
         for (const illustration of illustrations) {
             const imageName = typeof illustration === "string" ? illustration : illustration?.file;
             const knotName = typeof illustration === "string" ? illustration : illustration?.knot;
             const chapterId = typeof illustration === "object" ? illustration?.chapter : null;
-<<<<<<< HEAD
-            if (!/^[a-zA-Z0-9_-]+$/.test(imageName) || !/^[a-zA-Z0-9_-]+$/.test(knotName)
-                || (chapterId !== null && !/^[a-zA-Z0-9_-]+$/.test(chapterId))) {
-                fail(`${bookPath} obsahuje neplatný názov ilustrácie.`);
-            }
-            const imagePath = `books/${entry.id}/images/${imageName}.webp`;
-=======
             if (!/^[a-zA-Z0-9_-]+(?:\.(?:webp|png|jpe?g))?$/.test(imageName) || !/^[a-zA-Z0-9_-]+$/.test(knotName)
                 || (chapterId !== null && !/^[a-zA-Z0-9_-]+$/.test(chapterId))) {
                 fail(`${bookPath} obsahuje neplatný názov ilustrácie.`);
             }
             const imageFilename = /\.(?:webp|png|jpe?g)$/i.test(imageName) ? imageName : `${imageName}.webp`;
             const imagePath = `books/${entry.id}/images/${imageFilename}`;
->>>>>>> f20273d (Initial commit)
             if (!fs.existsSync(path.join(projectRoot, imagePath))) fail(`${bookPath} odkazuje na chýbajúcu ilustráciu ${imagePath}.`);
             checks += 1;
         }

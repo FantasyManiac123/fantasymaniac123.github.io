@@ -85,11 +85,8 @@ async function loadBookAccent(bookId, book) {
 function createBookCard(book) {
     const card = document.createElement("article");
     card.className = "book-card";
-<<<<<<< HEAD
-=======
     card.dataset.bookId = book.id;
     card.dataset.themeFile = book.theme || "";
->>>>>>> f20273d (Initial commit)
 
     const cardAccent = book._themeAccent || book.accent;
     if (cardAccent && /^#[0-9a-fA-F]{6}$/.test(cardAccent)) {
@@ -202,8 +199,6 @@ function toggleTheme() {
     document.body.classList.toggle("dark", dark);
     localStorage.setItem("reader-theme", dark ? "dark" : "light");
     updateThemeButton();
-<<<<<<< HEAD
-=======
     refreshBookAccents();
 }
 
@@ -215,7 +210,6 @@ async function refreshBookAccents() {
         const accent = await loadBookAccent(card.dataset.bookId, { theme: card.dataset.themeFile });
         if (accent) card.style.setProperty("--book-accent", accent);
     }));
->>>>>>> f20273d (Initial commit)
 }
 
 function loadTheme() {

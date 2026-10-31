@@ -8,8 +8,6 @@
   "cover": "cover.webp",
   "story": "story.json",
   "theme": "theme.json",
-<<<<<<< HEAD
-=======
   "hud": {
     "attributes": [
       { "variable": "meno", "label": "Meno", "icon": "✦", "emptyValue": "Cudzinec", "wide": true, "identity": true },
@@ -27,6 +25,5 @@
       "emptyLabel": "Zatiaľ nenesieš žiadny predmet."
     }
   },
->>>>>>> f20273d (Initial commit)
   "illustrations": ["zaciatok"]
 }
