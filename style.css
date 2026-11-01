@@ -43,27 +43,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Mobil a tablet: pri prirodzenom spomalení sa zachytia iba celé orientačné body,
-   nie každý odsek príbehu. Posúvanie preto zostáva voľné a čitateľné. */
-@media (hover: none) and (pointer: coarse) {
-    html {
-        scroll-snap-type: y proximity;
-        scroll-padding-top: 92px;
-    }
-
-    .reader-header,
-    .game-hud,
-    #story > .story-illustration,
-    #choices {
-        scroll-snap-align: start;
-        scroll-margin-top: 92px;
-    }
-
-    #choices {
-        scroll-snap-stop: normal;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -1279,10 +1258,20 @@ body { font-family: var(--ui-font); }
 body:not(.theme-image-border) .story-image { border-color: transparent; }
 body:not(.theme-image-shadow) .story-image { box-shadow: none; }
 
-body.theme-background-fixed { background-attachment: fixed; }
+body.theme-background-fixed { background-attachment: scroll; }
 
 @media (hover: none) and (pointer: coarse) {
-    body.theme-background-fixed { background-attachment: scroll; }
+    /* Pri pohybe prstom nepoužívame veľké textúry ani pevné scenické vrstvy.
+       Rozhranie zostáva farebne odlíšené, ale scroll nemusí maľovať celú obrazovku. */
+    body.theme-pattern-image {
+        background-image: none;
+        background-color: var(--background);
+    }
+
+    body.has-scene-background::before,
+    body.has-scene-background::after {
+        display: none;
+    }
 }
 body.theme-pattern-soft-glow {
     background-color: var(--background);

@@ -1,4 +1,4 @@
-const CACHE_NAME = "open-gamebook-reader-26955fe0472a4bc0";
+const CACHE_NAME = "open-gamebook-reader-38226d348fea0ee3";
 
 const PRECACHE = [
     "./",
