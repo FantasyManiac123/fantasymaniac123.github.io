@@ -137,8 +137,7 @@ a:focus-visible {
     left: max(28px, calc((100vw - var(--library-width)) / 2 + 28px));
     padding: 10px 0;
     border-radius: 8px;
-    background: color-mix(in srgb, var(--background) 90%, transparent);
-    backdrop-filter: blur(14px);
+    background: var(--surface);
 }
 
 .reader-page .reader-actions {
@@ -146,8 +145,7 @@ a:focus-visible {
     padding: 3px;
     border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
     border-radius: 999px;
-    background: color-mix(in srgb, var(--background) 90%, transparent);
-    backdrop-filter: blur(14px);
+    background: var(--surface);
 }
 
 .reader-heading {
@@ -1059,8 +1057,7 @@ body.has-scene-background #game {
     margin-top: 16px;
     border: 1px solid var(--border);
     border-radius: 18px;
-    background: color-mix(in srgb, var(--surface) 94%, transparent);
-    backdrop-filter: blur(8px);
+    background: var(--surface);
 }
 
 @media (max-width: 650px) {
@@ -1269,7 +1266,7 @@ body { font-family: var(--ui-font); }
     padding: var(--game-padding);
     border-radius: var(--game-radius);
     background: color-mix(in srgb, var(--surface) calc(var(--game-surface-opacity) * 100%), transparent);
-    backdrop-filter: blur(var(--game-backdrop-blur));
+    backdrop-filter: none;
 }
 
 .choice {
@@ -1283,6 +1280,10 @@ body:not(.theme-image-border) .story-image { border-color: transparent; }
 body:not(.theme-image-shadow) .story-image { box-shadow: none; }
 
 body.theme-background-fixed { background-attachment: fixed; }
+
+@media (hover: none) and (pointer: coarse) {
+    body.theme-background-fixed { background-attachment: scroll; }
+}
 body.theme-pattern-soft-glow {
     background-color: var(--background);
     background-image: radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 9%, transparent), transparent 32rem);
@@ -1440,6 +1441,27 @@ body.book-vaelgard .game-hud-identity-section .game-hud-attribute {
     border-radius: 14px;
     background: color-mix(in srgb, var(--choice) 72%, var(--surface));
 }
+
+/* Vo svetlom Vaelgarde má priama reč vlastný, tlmený odtieň pergamenu. */
+body.book-vaelgard:not(.dark) .story-character {
+    background: #eef2eb;
+    border-left-color: #778056;
+    color: #3c473b;
+}
+
+body.book-vaelgard:not(.dark) .story-player {
+    background: #f0ead8;
+    border-left-color: var(--accent);
+    color: #51462b;
+}
+
+body.book-vaelgard:not(.dark) .story-character .story-speaker {
+    color: #5c6843;
+}
+
+body.book-vaelgard:not(.dark) .story-player .story-speaker {
+    color: var(--accent-strong);
+}
 body.has-scene-background { background-image: var(--scene-background); background-size: cover; background-position: center; }
 
 .story-player,
@@ -1475,7 +1497,9 @@ body.has-scene-background { background-image: var(--scene-background); backgroun
 #story > .story-player:not(:first-child) {
     margin-top: 1.55em;
     padding-top: 1.05em;
+    padding-bottom: 1.05em;
     border-top: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border));
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border));
 }
 
 .story-thought {
@@ -1547,8 +1571,7 @@ body.text-thought-uppercase .story-thought { text-transform: uppercase; }
     display: grid;
     place-items: center;
     padding: 20px;
-    background: rgba(10, 9, 16, .58);
-    backdrop-filter: blur(8px);
+    background: rgba(10, 9, 16, .74);
 }
 
 .install-help[hidden] { display: none !important; }

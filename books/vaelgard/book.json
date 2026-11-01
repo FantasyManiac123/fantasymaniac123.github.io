@@ -2,22 +2,22 @@
   "id": "vaelgard",
   "title": "Vaelgard: Akadémia dračích jazdcov",
   "author": "OpenAI",
-  "version": "2.3",
+  "version": "2.4",
   "language": "sk",
   "description": "Fantasy gamebook o prvom roku na akadémii, kde si drak vyberá jazdca — a staré puto medzi drakmi a ľuďmi začína praskať.",
   "cover": "cover.webp",
   "theme": "theme.json",
   "illustrations": [
-    { "chapter": "chapter-01", "knot": "zaciatok", "file": "chapter-01.png" },
-    { "chapter": "chapter-02", "knot": "zaciatok", "file": "chapter-02.png" },
-    { "chapter": "chapter-03", "knot": "zaciatok", "file": "chapter-03.png" },
-    { "chapter": "chapter-04", "knot": "zaciatok", "file": "chapter-04.png" },
-    { "chapter": "chapter-05", "knot": "zaciatok", "file": "chapter-05.png" },
-    { "chapter": "chapter-06", "knot": "zaciatok", "file": "chapter-06.png" },
-    { "chapter": "chapter-07", "knot": "zaciatok", "file": "chapter-07.png" },
-    { "chapter": "chapter-08", "knot": "zaciatok", "file": "chapter-08.png" },
-    { "chapter": "chapter-09", "knot": "zaciatok", "file": "chapter-09.png" },
-    { "chapter": "chapter-10", "knot": "zaciatok", "file": "chapter-10.png" },
+    { "chapter": "chapter-01", "knot": "zaciatok", "file": "chapter-01.webp" },
+    { "chapter": "chapter-02", "knot": "zaciatok", "file": "chapter-02.webp" },
+    { "chapter": "chapter-03", "knot": "zaciatok", "file": "chapter-03.webp" },
+    { "chapter": "chapter-04", "knot": "zaciatok", "file": "chapter-04.webp" },
+    { "chapter": "chapter-05", "knot": "zaciatok", "file": "chapter-05.webp" },
+    { "chapter": "chapter-06", "knot": "zaciatok", "file": "chapter-06.webp" },
+    { "chapter": "chapter-07", "knot": "zaciatok", "file": "chapter-07.webp" },
+    { "chapter": "chapter-08", "knot": "zaciatok", "file": "chapter-08.webp" },
+    { "chapter": "chapter-09", "knot": "zaciatok", "file": "chapter-09.webp" },
+    { "chapter": "chapter-10", "knot": "zaciatok", "file": "chapter-10.webp" },
     "vzlet",
     { "chapter": "chapter-08", "knot": "teleskop", "file": "observatorium" }
   ],
@@ -41,7 +41,8 @@
     "puto",
     "tajomstvo",
     "zranenie",
-    "drak"
+    "drak",
+    "volba_cesty"
   ],
   "chapters": [
     {
@@ -52,12 +53,26 @@
     {
       "id": "chapter-02",
       "title": "II. Prvé puto",
-      "story": "chapters/chapter-02.json"
+      "story": "chapters/chapter-02.json",
+      "next": [
+        {
+          "chapter": "chapter-03",
+          "when": [{ "variable": "volba_cesty", "equals": "archiv" }]
+        },
+        { "chapter": "chapter-05" }
+      ]
     },
     {
       "id": "chapter-03",
       "title": "III. Zakázaný archív",
-      "story": "chapters/chapter-03.json"
+      "story": "chapters/chapter-03.json",
+      "next": [
+        {
+          "chapter": "chapter-04",
+          "when": [{ "variable": "volba_cesty", "equals": "kotva" }]
+        },
+        { "chapter": "chapter-05" }
+      ]
     },
     {
       "id": "chapter-04",
@@ -72,7 +87,14 @@
     {
       "id": "chapter-06",
       "title": "VI. Koruna",
-      "story": "chapters/chapter-06.json"
+      "story": "chapters/chapter-06.json",
+      "next": [
+        {
+          "chapter": "chapter-07",
+          "when": [{ "variable": "volba_cesty", "equals": "sever" }]
+        },
+        { "chapter": "chapter-09" }
+      ]
     },
     {
       "id": "chapter-07",

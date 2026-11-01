@@ -719,6 +719,8 @@ function render(savedDisplay = null) {
     choicesElement.innerHTML = "";
     clearSceneBackground();
 
+    const storyFragment = document.createDocumentFragment();
+
     let pendingTextType = "narrator";
     let pendingSpeaker = "";
     let sceneIllustrationAdded = false;
@@ -760,15 +762,17 @@ function render(savedDisplay = null) {
         // Napr. zaciatok.0.14 -> zaciatok -> images/zaciatok.webp
         if (!sceneIllustrationAdded) {
             const knotName = getCurrentKnotName();
-            if (knotName) addAutomaticSceneImage(knotName);
+            if (knotName) addAutomaticSceneImage(knotName, storyFragment);
             sceneIllustrationAdded = true;
         }
 
-        addStoryParagraph(text, pendingTextType, pendingSpeaker);
+        addStoryParagraph(text, pendingTextType, pendingSpeaker, storyFragment);
 
         pendingTextType = "narrator";
         pendingSpeaker = "";
     }
+
+    storyElement.appendChild(storyFragment);
 
     story.currentChoices.forEach(choice => {
         const button = document.createElement("button");
@@ -801,7 +805,7 @@ function getCurrentKnotName() {
     return first;
 }
 
-function addAutomaticSceneImage(knotName) {
+function addAutomaticSceneImage(knotName, target = storyElement) {
     const illustrations = Array.isArray(bookMetadata?.illustrations) ? bookMetadata.illustrations : [];
     const illustration = illustrations.find(item => {
         if (typeof item === "string") return item === knotName;
@@ -825,7 +829,7 @@ function addAutomaticSceneImage(knotName) {
     image.className = "story-image";
     image.src = src;
     image.alt = "";
-    image.loading = "eager";
+    image.loading = "lazy";
     image.decoding = "async";
 
     // Knot nemusí mať ilustráciu. Ak súbor neexistuje,
@@ -835,11 +839,11 @@ function addAutomaticSceneImage(knotName) {
     });
 
     figure.appendChild(image);
-    storyElement.appendChild(figure);
+    target?.appendChild(figure);
 }
 
 
-function addStoryParagraph(text, type = "narrator", speaker = "") {
+function addStoryParagraph(text, type = "narrator", speaker = "", target = storyElement) {
     const allowedTypes = ["narrator", "player", "character", "thought", "system", "inscription"];
     const safeType = allowedTypes.includes(type) ? type : "narrator";
 
@@ -860,7 +864,7 @@ function addStoryParagraph(text, type = "narrator", speaker = "") {
     textNode.textContent = text;
     paragraph.appendChild(textNode);
 
-    storyElement.appendChild(paragraph);
+    target?.appendChild(paragraph);
 }
 
 function captureDisplayedScene() {
@@ -919,29 +923,63 @@ function clearSceneBackground() {
     document.body.style.removeProperty("--scene-background");
 }
 
+function chapterRouteMatches(route) {
+    if (!Array.isArray(route?.when) || route.when.length === 0) return false;
+
+    return route.when.every(condition => {
+        if (!condition || typeof condition.variable !== "string"
+            || !Object.prototype.hasOwnProperty.call(condition, "equals")) {
+            return false;
+        }
+
+        return Object.is(globalGameState[condition.variable], condition.equals);
+    });
+}
+
+function getNextChapterIndex() {
+    const chapters = bookMetadata?.chapters;
+    if (!chapterMode || !Array.isArray(chapters) || !currentChapter) return null;
+
+    if (Array.isArray(currentChapter.next)) {
+        for (const route of currentChapter.next) {
+            if (!route || typeof route.chapter !== "string") continue;
+            if (route.when !== undefined && !chapterRouteMatches(route)) continue;
+
+            const chapterIndex = chapters.findIndex(chapter => chapter?.id === route.chapter);
+            if (chapterIndex >= 0) return chapterIndex;
+        }
+
+        return null;
+    }
+
+    return currentChapterIndex < chapters.length - 1 ? currentChapterIndex + 1 : null;
+}
+
 function showStoryEnd() {
-    if (chapterMode && currentChapterIndex < bookMetadata.chapters.length - 1) {
-        captureGlobalState();
+    if (chapterMode) captureGlobalState();
+    const nextChapterIndex = getNextChapterIndex();
+
+    if (nextChapterIndex !== null) {
         autosave();
 
-        const nextChapter = bookMetadata.chapters[currentChapterIndex + 1];
+        const nextChapter = bookMetadata.chapters[nextChapterIndex];
 
         const panel = document.createElement("div");
         panel.className = "chapter-end";
 
         const label = document.createElement("p");
         label.className = "chapter-end-label";
-        label.textContent = `Kapitola ${currentChapterIndex + 1} dokončená`;
+        label.textContent = `${currentChapter.title || "Kapitola"} dokončená`;
         panel.appendChild(label);
 
         const button = document.createElement("button");
         button.className = "choice chapter-next-button";
         button.type = "button";
-        button.textContent = `Pokračovať — ${nextChapter.title || `Kapitola ${currentChapterIndex + 2}`}`;
+        button.textContent = `Pokračovať — ${nextChapter.title || "Ďalšia kapitola"}`;
         button.addEventListener("click", async () => {
             button.disabled = true;
             try {
-                await loadChapter(currentChapterIndex + 1, null, globalGameState);
+                await loadChapter(nextChapterIndex, null, globalGameState);
                 scrollToStory();
             } catch (error) {
                 console.error("Ďalšiu kapitolu sa nepodarilo načítať:", error);

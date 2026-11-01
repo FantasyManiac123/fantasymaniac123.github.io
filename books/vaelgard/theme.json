@@ -14,7 +14,7 @@
   },
   "typography": {"storyFont":"sans-serif","uiFont":"sans-serif","storySize":"19px","lineHeight":1.82,"paragraphIndent":"1.6em"},
   "layout": {"readingWidth":"940px","gameRadius":"26px","gamePadding":"38px 46px 96px"},
-  "background": {"pattern":"parchment","patternImage":"exec-ccb928c3-0b49-489a-96e9-40a2af8260ac.png","darkPatternImage":"exec-6f387a87-1b88-4a89-9cfb-c834e0e9290f.png","patternSize":"460px 460px","fixed":true,"gameSurfaceOpacity":1,"blur":"0px"},
+  "background": {"pattern":"parchment","patternImage":"exec-ccb928c3-0b49-489a-96e9-40a2af8260ac.webp","darkPatternImage":"exec-6f387a87-1b88-4a89-9cfb-c834e0e9290f.webp","patternSize":"460px 460px","fixed":true,"gameSurfaceOpacity":1,"blur":"0px"},
   "choices": {"radius":"16px","borderWidth":"1px","accentBorderWidth":"4px"},
   "illustrations": {"radius":"18px","border":true,"shadow":true},
   "textStyles": {

@@ -6,6 +6,7 @@ VAR puto = 0
 VAR tajomstvo = 0
 VAR zranenie = 0
 VAR drak = ""
+VAR volba_cesty = ""
 
 -> zaciatok
 
@@ -415,12 +416,15 @@ Niečo sa stalo s jeho putom. Eren vykríkol a zviera sa vo vzduchu prevrátilo.
 * [Vyraziť s Nymarom za nimi bez rozkazu.]
     ~ odvaha += 2
     ~ vzdor += 1
+    ~ volba_cesty = "vycvik"
     -> zachrana
 * [Zakričať na inštruktorov a držať Nymara na mieste.]
     ~ rozum += 1
+    ~ volba_cesty = "vycvik"
     -> zachrana_instruktor
 * [Spýtať sa Nymara, čo cíti z cudzieho puta.]
     ~ tajomstvo += 1
+    ~ volba_cesty = "archiv"
     -> citit_puto
 
 === zachrana ===

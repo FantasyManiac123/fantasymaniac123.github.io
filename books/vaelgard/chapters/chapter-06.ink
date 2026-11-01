@@ -6,6 +6,7 @@ VAR puto = 0
 VAR tajomstvo = 0
 VAR zranenie = 0
 VAR drak = ""
+VAR volba_cesty = ""
 
 -> zaciatok
 
@@ -424,12 +425,15 @@ Strecha laboratória sa roztrhla pod Nymarovými pazúrmi.
 
 * [Vziať Caela so sebou.]
     ~ sucit += 2
+    ~ volba_cesty = "sever"
     -> let_prec
 * [Vziať iba dôkazy a zraneného draka.]
     ~ rozum += 1
+    ~ volba_cesty = "sever"
     -> let_prec
 * [Zostať ešte chvíľu a zničiť laboratórium.]
     ~ vzdor += 2
+    ~ volba_cesty = "rada"
     -> znicit_lab
 
 === znicit_lab ===

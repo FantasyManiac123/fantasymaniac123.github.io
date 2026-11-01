@@ -1,4 +1,4 @@
-const CACHE_NAME = "open-gamebook-reader-6e5fc4f15aaf9ec6";
+const CACHE_NAME = "open-gamebook-reader-26955fe0472a4bc0";
 
 const PRECACHE = [
     "./",
@@ -6,9 +6,6 @@ const PRECACHE = [
     "./books/library.json",
     "./books/ortheon/book.json",
     "./books/ortheon/cover.webp",
-    "./books/ortheon/images/pattern-dark.svg",
-    "./books/ortheon/images/pattern-light.svg",
-    "./books/ortheon/images/zaciatok.webp",
     "./books/ortheon/story.json",
     "./books/ortheon/theme.json",
     "./books/vaelgard/book.json",
@@ -23,24 +20,6 @@ const PRECACHE = [
     "./books/vaelgard/chapters/chapter-09.json",
     "./books/vaelgard/chapters/chapter-10.json",
     "./books/vaelgard/cover.webp",
-    "./books/vaelgard/images/chapter-01.png",
-    "./books/vaelgard/images/chapter-02.png",
-    "./books/vaelgard/images/chapter-03.png",
-    "./books/vaelgard/images/chapter-04.png",
-    "./books/vaelgard/images/chapter-05.png",
-    "./books/vaelgard/images/chapter-06.png",
-    "./books/vaelgard/images/chapter-07.png",
-    "./books/vaelgard/images/chapter-08.png",
-    "./books/vaelgard/images/chapter-09.png",
-    "./books/vaelgard/images/chapter-10.png",
-    "./books/vaelgard/images/dragon-scales.png",
-    "./books/vaelgard/images/exec-6f387a87-1b88-4a89-9cfb-c834e0e9290f.png",
-    "./books/vaelgard/images/exec-ccb928c3-0b49-489a-96e9-40a2af8260ac.png",
-    "./books/vaelgard/images/observatorium.webp",
-    "./books/vaelgard/images/pattern-dark.svg",
-    "./books/vaelgard/images/pattern-light.svg",
-    "./books/vaelgard/images/vzlet.webp",
-    "./books/vaelgard/images/zaciatok.webp",
     "./books/vaelgard/theme.json",
     "./game.html",
     "./game.js",
@@ -80,6 +59,26 @@ self.addEventListener("fetch", event => {
 
     const url = new URL(request.url);
     if (url.origin !== self.location.origin) return;
+
+    const isImage = request.destination === "image"
+        || /\.(?:avif|gif|jpe?g|png|svg|webp)$/i.test(url.pathname);
+
+    // Ilustrácie netvoria súčasť úvodného precache. Po prvom zobrazení ich
+    // však používame priamo z cache, aby sa pri ďalšom čítaní nezdržovali sieťou.
+    if (isImage) {
+        event.respondWith(
+            caches.match(request).then(cached => {
+                if (cached) return cached;
+                return fetch(request).then(response => {
+                    if (response && response.ok) {
+                        caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
+                    }
+                    return response;
+                });
+            })
+        );
+        return;
+    }
 
     // Network-first keeps development and book updates fresh; cache is the offline fallback.
     event.respondWith(

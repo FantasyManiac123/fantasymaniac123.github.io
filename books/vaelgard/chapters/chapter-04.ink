@@ -6,6 +6,7 @@ VAR puto = 0
 VAR tajomstvo = 0
 VAR zranenie = 0
 VAR drak = ""
+VAR volba_cesty = ""
 
 -> zaciatok
 

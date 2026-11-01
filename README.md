@@ -75,6 +75,40 @@ Namiesto `story` môže `book.json` obsahovať pole `chapters`. Premenné, ktor�
 }
 ```
 
+Kapitola bez vlastnosti `next` pokračuje do nasledujúcej kapitoly v zozname. Pre vetvenie pridaj `next`: prvá cesta, ktorej sa zhodujú všetky podmienky `when`, vyhrá; cesta bez `when` je predvolená a musí byť posledná.
+
+```json
+{
+  "globalVariables": ["volba_cesty"],
+  "chapters": [
+    {
+      "id": "chapter-01",
+      "title": "I. Rozhodnutie",
+      "story": "chapters/chapter-01.json",
+      "next": [
+        {
+          "chapter": "chapter-archiv",
+          "when": [{ "variable": "volba_cesty", "equals": "archiv" }]
+        },
+        { "chapter": "chapter-vycvik" }
+      ]
+    }
+  ]
+}
+```
+
+Premennú musí Ink deklarovať v každej kapitole a musí byť uvedená v `globalVariables`:
+
+```ink
+VAR volba_cesty = ""
+
+* [Preskúmať archív.]
+    ~ volba_cesty = "archiv"
+    -> koniec_kapitoly
+```
+
+Pri zmene trás zvýš `version` knihy, aby sa stará uložená pozícia nenačítala do inej vetvy.
+
 ## Atribúty a inventár
 
 Čítačka vie nad príbehom zobraziť panel postavy. V `book.json` pridaj konfiguráciu `hud`; hodnoty sa čítajú priamo z globálnych Ink premenných a obnovia sa po každej voľbe aj po načítaní saveu.

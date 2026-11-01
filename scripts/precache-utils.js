@@ -28,7 +28,12 @@ function listFiles(directory, projectRoot) {
         const filePath = path.join(directory, entry.name);
         if (entry.isDirectory()) return listFiles(filePath, projectRoot);
         if (!entry.isFile() || /\.(ink|txt)$/i.test(entry.name)) return [];
-        return [`./${path.relative(projectRoot, filePath).split(path.sep).join("/")}`];
+
+        const assetPath = `./${path.relative(projectRoot, filePath).split(path.sep).join("/")}`;
+        // Ilustrácie a textúry sa načítajú až pri otvorení danej knihy/scény.
+        // Inak by prvá PWA inštalácia sťahovala desiatky megabajtov navyše.
+        if (assetPath.includes("/images/")) return [];
+        return [assetPath];
     });
 }
 

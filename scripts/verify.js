@@ -44,6 +44,64 @@ function isValidVariableName(value) {
     return typeof value === "string" && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
 }
 
+function isRouteValue(value) {
+    return (typeof value === "string" && value.length <= 80)
+        || (typeof value === "number" && Number.isFinite(value))
+        || typeof value === "boolean";
+}
+
+function verifyChapterNavigation(bookPath, book, globalVariables) {
+    if (!Array.isArray(book.chapters) || book.chapters.length === 0) return;
+
+    const chapterIds = new Set();
+    for (const chapter of book.chapters) {
+        if (!/^[a-zA-Z0-9_-]+$/.test(chapter?.id || "")) {
+            fail(`${bookPath} obsahuje kapitolu s neplatným ID.`);
+        }
+        if (chapterIds.has(chapter.id)) fail(`${bookPath} obsahuje duplicitné ID kapitoly ${chapter.id}.`);
+        chapterIds.add(chapter.id);
+    }
+
+    for (const chapter of book.chapters) {
+        if (chapter.next === undefined) continue;
+        if (!Array.isArray(chapter.next) || chapter.next.length === 0) {
+            fail(`${bookPath} má pri kapitole ${chapter.id} neplatné pravidlá next.`);
+        }
+
+        let hasDefaultRoute = false;
+        chapter.next.forEach((route, routeIndex) => {
+            if (!route || typeof route !== "object" || Array.isArray(route)
+                || !chapterIds.has(route.chapter)) {
+                fail(`${bookPath} má pri kapitole ${chapter.id} neplatný cieľ next.`);
+            }
+
+            if (route.when === undefined) {
+                if (hasDefaultRoute || routeIndex !== chapter.next.length - 1) {
+                    fail(`${bookPath} má pri kapitole ${chapter.id} predvolenú cestu next na nesprávnom mieste.`);
+                }
+                hasDefaultRoute = true;
+                return;
+            }
+
+            if (!Array.isArray(route.when) || route.when.length === 0) {
+                fail(`${bookPath} má pri kapitole ${chapter.id} neplatnú podmienku next.`);
+            }
+
+            for (const condition of route.when) {
+                if (!condition || typeof condition !== "object" || Array.isArray(condition)
+                    || !isValidVariableName(condition.variable)
+                    || !globalVariables.includes(condition.variable)
+                    || !Object.prototype.hasOwnProperty.call(condition, "equals")
+                    || !isRouteValue(condition.equals)) {
+                    fail(`${bookPath} má pri kapitole ${chapter.id} neplatnú podmienku next.`);
+                }
+            }
+        });
+    }
+
+    checks += 1;
+}
+
 function verifyHud(bookPath, book, globalVariables) {
     if (book.hud === undefined) return;
     if (!book.hud || typeof book.hud !== "object" || Array.isArray(book.hud)) {
@@ -203,6 +261,7 @@ function verifyBooks() {
         if (!globalVariables.every(isValidVariableName)) {
             fail(`${bookPath} obsahuje neplatnú globálnu premennú.`);
         }
+        verifyChapterNavigation(bookPath, book, globalVariables);
         verifyHud(bookPath, book, globalVariables);
         verifyTheme(bookPath, entry.id, book);
 

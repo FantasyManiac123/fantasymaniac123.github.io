@@ -6,6 +6,7 @@ VAR puto = 0
 VAR tajomstvo = 0
 VAR zranenie = 0
 VAR drak = ""
+VAR volba_cesty = ""
 
 -> zaciatok
 
@@ -385,13 +386,16 @@ Lyra mu neverila. Taren neveril nikomu, čo bola podľa neho efektívnejšia pol
 
 * [Prijať dohodu. Potrebujete viac informácií.]
     ~ rozum += 2
+    ~ volba_cesty = "kotva"
     -> dohoda
 * [Odmietnuť a žiadať okamžité zrušenie Kotvy.]
     ~ vzdor += 2
+    ~ volba_cesty = "vycvik"
     -> odmietnutie
 * [Prijať iba ak bude mať Nymar rovnaké slovo ako ty.]
     ~ sucit += 2
     ~ puto += 2
+    ~ volba_cesty = "kotva"
     -> podmienka
 
 === dohoda ===
